@@ -1,11 +1,11 @@
-# Breaking Into Web Security
+# Welcome to My First Blog
 
-I started my cybersecurity journey at a young age, exploring how websites work and how they break.
+Hey everyone 👋  
+This is my first post on my futuristic website.
 
-* Learned the basics of HTML, JS, and request flows.
-* Discovered my first XSS and realized the power of ethical hacking.
-* Slowly got deeper into Python automation and web vulnerabilities.
+## What I’m Working On
+* Building next-gen security automation tools  
+* Enhancing recon workflows  
+* Learning more about API & cloud security
 
-Today, I focus on building tools that **automate recon and vulnerability detection**.
-
-> "The best security comes from curiosity and persistence."
+![Cyberpunk](https://images.unsplash.com/photo-1501594907352-04cda38ebc29?auto=format&fit=crop&w=800&q=80)
