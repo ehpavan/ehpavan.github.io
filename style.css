@@ -1,177 +1,28 @@
-/* ====== Global Style ====== */
+/* ===== Global ===== */
 @import url('https://fonts.googleapis.com/css2?family=Orbitron:wght@400;600&family=Poppins:wght@300;400;500&display=swap');
 
-* {
-  margin: 0;
-  padding: 0;
-  box-sizing: border-box;
-  scroll-behavior: smooth;
-}
+* { margin:0; padding:0; box-sizing:border-box; scroll-behavior:smooth; }
+body { font-family:'Poppins', sans-serif; background:#090913; color:#e0e0ff; line-height:1.6; }
+a { text-decoration:none; transition:0.2s; }
+a:hover { color:#00ffff; }
 
-body {
-  font-family: 'Poppins', sans-serif;
-  background: #090913;
-  color: #e0e0ff;
-  line-height: 1.6;
-}
+/* ===== Navbar ===== */
+.navbar { display:flex; justify-content:space-between; align-items:center; padding:1rem 5%; background:rgba(10,10,20,0.7); backdrop-filter:blur(10px); position:sticky; top:0; z-index:100; }
+.logo { font-family:'Orbitron', sans-serif; font-size:1.6rem; color:#00eaff; }
+.logo .glow { color:#8f00ff; }
+.nav-links { list-style:none; display:flex; gap:2rem; }
+.nav-links a { color:#e0e0ff; font-weight:500; }
 
-/* ====== Navbar ====== */
-.navbar {
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-  padding: 1.2rem 3rem;
-  background: rgba(10, 10, 20, 0.7);
-  backdrop-filter: blur(10px);
-  position: sticky;
-  top: 0;
-  z-index: 100;
-  box-shadow: 0 0 12px rgba(0, 255, 255, 0.1);
-}
+/* ===== Sections ===== */
+.section { padding:5rem 10%; text-align:center; }
+.section h1, .section h2 { font-family:'Orbitron', sans-serif; color:#00eaff; margin-bottom:1rem; }
 
-.logo {
-  font-family: 'Orbitron', sans-serif;
-  font-size: 1.6rem;
-  letter-spacing: 1px;
-  color: #00eaff;
-}
-.logo .glow {
-  color: #8f00ff;
-}
+/* ===== Hero ===== */
+.hero p.mission { margin:1rem 0; font-size:1.05rem; color:#d0d0ff; }
+.buttons a.btn { margin:0.5rem; padding:0.6rem 1.4rem; border-radius:8px; background:#00eaff; color:#090913; font-weight:500; }
+.buttons a.btn.outline { background:transparent; border:1px solid #00eaff; color:#00eaff; }
 
-.nav-links {
-  list-style: none;
-  display: flex;
-  gap: 2rem;
-}
-
-.nav-links a {
-  color: #e0e0ff;
-  text-decoration: none;
-  font-weight: 500;
-  transition: color 0.2s ease;
-}
-
-.nav-links a:hover {
-  color: #00eaff;
-}
-
-/* ====== Sections ====== */
-.section {
-  padding: 5rem 10%;
-  text-align: center;
-}
-
-.section h1 {
-  font-family: 'Orbitron', sans-serif;
-  font-size: 2.2rem;
-  color: #00eaff;
-  margin-bottom: 1rem;
-}
-
-/* ====== About ====== */
-.about p {
-  max-width: 750px;
-  margin: auto;
-  font-size: 1.05rem;
-  color: #d0d0ff;
-}
-.about a {
-  color: #66f5ff;
-  text-decoration: none;
-  border-bottom: 1px dotted #66f5ff;
-}
-.about a:hover {
-  color: #00ffff;
-}
-
-/* ====== Blogs ====== */
-.blogs h1 {
-  margin-bottom: 2rem;
-}
-
-/* Blog list */
-#blog-list {
-  margin-bottom: 2rem;
-}
-
-.blog-item {
-  background: rgba(255, 255, 255, 0.04);
-  padding: 1rem;
-  border-radius: 10px;
-  cursor: pointer;
-  transition: all 0.3s ease;
-  margin-bottom: 1rem;
-}
-.blog-item:hover {
-  background: rgba(0, 255, 255, 0.08);
-  transform: translateY(-3px);
-}
-
-/* ====== Markdown Blog Styling ====== */
-.blog-content {
-  background: #0a0a0f;
-  color: #e0e0ff;
-  padding: 2rem;
-  border-radius: 12px;
-  box-shadow: 0 0 20px rgba(0, 255, 255, 0.1);
-  line-height: 1.7;
-  font-size: 1rem;
-  max-width: 800px;
-  margin: 2rem auto;
-}
-
-/* Markdown Elements */
-.blog-content h1, 
-.blog-content h2, 
-.blog-content h3 {
-  color: #00eaff;
-  border-left: 3px solid #00eaff;
-  padding-left: 10px;
-  margin-top: 1.5rem;
-}
-
-.blog-content a {
-  color: #66f5ff;
-  text-decoration: none;
-  border-bottom: 1px dotted #66f5ff;
-}
-.blog-content a:hover {
-  color: #00ffff;
-}
-
-.blog-content ul {
-  list-style: disc;
-  margin-left: 2rem;
-}
-.blog-content li {
-  margin: 0.4rem 0;
-}
-
-.blog-content img {
-  max-width: 100%;
-  border-radius: 8px;
-  box-shadow: 0 0 12px rgba(0, 255, 255, 0.15);
-  margin: 1rem 0;
-}
-
-.blog-content pre {
-  background: #111122;
-  color: #00ffcc;
-  padding: 1rem;
-  border-radius: 8px;
-  overflow-x: auto;
-  box-shadow: 0 0 12px rgba(0,255,255,0.1);
-}
-.blog-content code {
-  color: #00ffd9;
-}
-
-/* ====== Footer ====== */
-footer {
-  text-align: center;
-  padding: 1.5rem;
-  background: rgba(10, 10, 20, 0.7);
-  font-size: 0.9rem;
-  color: #aaa;
-}
+/* ===== About ===== */
+.about p { max-width:700px; margin:1rem auto; color:#d0d0ff; }
+.profiles a { margin:0 1rem; color:#66f5ff; }
+.projects-link { margin-top:1rem; display:block; color:#66f5ff; }
