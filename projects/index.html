@@ -1,0 +1,110 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <title>Pavan — Projects</title>
+  <!-- reuse root stylesheet so look and feel matches the site -->
+  <link rel="stylesheet" href="../style.css" />
+  <style>
+    /* small, neutral tweaks for projects layout (kept minimal) */
+    .projects-wrap { max-width:1100px; margin:30px auto; padding:0 5%; }
+    .projects-grid { display:grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); gap:18px; margin-top:20px; }
+    .project-card {
+      background: rgba(255,255,255,0.03);
+      border-radius: 12px;
+      padding:18px;
+      transition: transform .16s ease, box-shadow .16s ease;
+      display:flex;
+      flex-direction:column;
+      justify-content:space-between;
+      min-height:160px;
+    }
+    .project-card:hover {
+      transform: translateY(-6px);
+      box-shadow: 0 10px 30px rgba(0,255,255,0.06);
+    }
+    .project-title { font-size:1.05rem; font-weight:700; margin-bottom:8px; color:inherit; }
+    .project-desc { color:#c7c7c7; margin-bottom:14px; flex:1; }
+    .project-actions { display:flex; gap:10px; align-items:center; }
+    .btn-ghost {
+      padding:8px 12px;
+      border-radius:8px;
+      text-decoration:none;
+      color:inherit;
+      border:1px solid rgba(255,255,255,0.04);
+      font-weight:600;
+      background:transparent;
+    }
+    .repo-link {
+      color: #00eaff;
+      text-decoration:none;
+      font-weight:700;
+    }
+    @media (max-width:600px){
+      .projects-wrap{ padding:0 4%; }
+    }
+  </style>
+</head>
+<body>
+  <nav class="navbar">
+    <div class="logo">Pavan<span class="accent">.io</span></div>
+    <ul class="nav-links">
+      <li><a href="../index.html">Home</a></li>
+      <li><a href="../blogs/">Blogs</a></li>
+    </ul>
+  </nav>
+
+  <main class="projects-wrap">
+    <h1 style="font-family: 'Orbitron', sans-serif; color: #00eaff; text-align:center;">Projects & Tools</h1>
+    <p style="text-align:center; color:#c7c7c7; max-width:900px; margin:8px auto 18px;">
+      A curated set of tools and playbooks I maintain — click **Checkout** to open the GitHub repository.
+    </p>
+
+    <div class="projects-grid">
+      <div class="project-card">
+        <div>
+          <div class="project-title">SubTrail</div>
+          <div class="project-desc">
+            Modular subdomain discovery pipeline — passive + active sources, normalized output for scanners and screenshotters.
+          </div>
+        </div>
+        <div class="project-actions">
+          <a class="btn-ghost" href="https://github.com/ehpavan/subtrail" target="_blank" rel="noopener noreferrer">Checkout</a>
+          <a class="repo-link" href="https://github.com/ehpavan/subtrail" target="_blank" rel="noopener noreferrer">github.com/ehpavan/subtrail</a>
+        </div>
+      </div>
+
+      <div class="project-card">
+        <div>
+          <div class="project-title">SubFury</div>
+          <div class="project-desc">
+            Fast enumeration & verification tool — built for scale with optional screenshot and fingerprinting hooks.
+          </div>
+        </div>
+        <div class="project-actions">
+          <a class="btn-ghost" href="https://github.com/ehpavan/subfury" target="_blank" rel="noopener noreferrer">Checkout</a>
+          <a class="repo-link" href="https://github.com/ehpavan/subfury" target="_blank" rel="noopener noreferrer">github.com/ehpavan/subfury</a>
+        </div>
+      </div>
+
+      <div class="project-card">
+        <div>
+          <div class="project-title">Bug‑Bounty Playbook</div>
+          <div class="project-desc">
+            Practical playbook — recon checklists, reporting templates, POC snippets, and triage workflows for faster, high-quality reports.
+          </div>
+        </div>
+        <div class="project-actions">
+          <a class="btn-ghost" href="https://github.com/ehpavan/bug-bounty-playbook" target="_blank" rel="noopener noreferrer">Checkout</a>
+          <a class="repo-link" href="https://github.com/ehpavan/bug-bounty-playbook" target="_blank" rel="noopener noreferrer">github.com/ehpavan/bug-bounty-playbook</a>
+        </div>
+      </div>
+    </div>
+  </main>
+
+  <footer style="text-align:center; padding:28px 0; color:#999;">
+    <p>© 2025 Pavan.</p>
+  </footer>
+</body>
+</html>
