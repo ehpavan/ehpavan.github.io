@@ -3,6 +3,10 @@
 Hey everyone 👋  
 This is my first post on my futuristic website.
 
+```
+print("it working")
+```
+
 ## What I’m Working On
 * Building next-gen security automation tools  
 * Enhancing recon workflows  
