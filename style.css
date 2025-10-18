@@ -1,28 +1,137 @@
-/* ===== Global ===== */
-@import url('https://fonts.googleapis.com/css2?family=Orbitron:wght@400;600&family=Poppins:wght@300;400;500&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600&display=swap');
 
-* { margin:0; padding:0; box-sizing:border-box; scroll-behavior:smooth; }
-body { font-family:'Poppins', sans-serif; background:#090913; color:#e0e0ff; line-height:1.6; }
-a { text-decoration:none; transition:0.2s; }
-a:hover { color:#00ffff; }
+:root {
+  --bg: #0a0a0f;
+  --fg: #e5e5e5;
+  --accent: #00ffff;
+}
 
-/* ===== Navbar ===== */
-.navbar { display:flex; justify-content:space-between; align-items:center; padding:1rem 5%; background:rgba(10,10,20,0.7); backdrop-filter:blur(10px); position:sticky; top:0; z-index:100; }
-.logo { font-family:'Orbitron', sans-serif; font-size:1.6rem; color:#00eaff; }
-.logo .glow { color:#8f00ff; }
-.nav-links { list-style:none; display:flex; gap:2rem; }
-.nav-links a { color:#e0e0ff; font-weight:500; }
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+  scroll-behavior: smooth;
+}
 
-/* ===== Sections ===== */
-.section { padding:5rem 10%; text-align:center; }
-.section h1, .section h2 { font-family:'Orbitron', sans-serif; color:#00eaff; margin-bottom:1rem; }
+body {
+  font-family: 'Poppins', sans-serif;
+  background: var(--bg);
+  color: var(--fg);
+  overflow-x: hidden;
+}
 
-/* ===== Hero ===== */
-.hero p.mission { margin:1rem 0; font-size:1.05rem; color:#d0d0ff; }
-.buttons a.btn { margin:0.5rem; padding:0.6rem 1.4rem; border-radius:8px; background:#00eaff; color:#090913; font-weight:500; }
-.buttons a.btn.outline { background:transparent; border:1px solid #00eaff; color:#00eaff; }
+/* Navbar */
+.navbar {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 20px 8%;
+  background: rgba(255, 255, 255, 0.03);
+  position: sticky;
+  top: 0;
+  backdrop-filter: blur(10px);
+}
 
-/* ===== About ===== */
-.about p { max-width:700px; margin:1rem auto; color:#d0d0ff; }
-.profiles a { margin:0 1rem; color:#66f5ff; }
-.projects-link { margin-top:1rem; display:block; color:#66f5ff; }
+.logo {
+  font-size: 1.6rem;
+  font-weight: 600;
+}
+
+.accent {
+  color: var(--accent);
+}
+
+.nav-links {
+  display: flex;
+  gap: 2rem;
+  list-style: none;
+}
+
+.nav-links a {
+  text-decoration: none;
+  color: var(--fg);
+  transition: 0.3s;
+}
+
+.nav-links a:hover {
+  color: var(--accent);
+}
+
+/* Hero */
+.hero {
+  text-align: center;
+  padding: 100px 10%;
+}
+
+.hero h1 {
+  font-size: 3rem;
+  margin-bottom: 10px;
+}
+
+.hero p {
+  font-size: 1.2rem;
+  color: #c7c7c7;
+  margin-bottom: 30px;
+}
+
+.buttons .btn {
+  text-decoration: none;
+  color: var(--bg);
+  background: var(--accent);
+  padding: 10px 25px;
+  border-radius: 8px;
+  font-weight: 600;
+  margin: 10px;
+  transition: 0.3s;
+}
+
+.buttons .secondary {
+  background: transparent;
+  color: var(--accent);
+  border: 1px solid var(--accent);
+}
+
+.buttons .btn:hover {
+  transform: scale(1.05);
+}
+
+/* About */
+.about {
+  padding: 60px 10%;
+}
+
+.about h2 {
+  font-size: 2rem;
+  margin-bottom: 15px;
+  border-left: 4px solid var(--accent);
+  padding-left: 10px;
+}
+
+.about p {
+  color: #c7c7c7;
+  margin-bottom: 20px;
+  line-height: 1.7;
+}
+
+.about h3 {
+  margin-top: 20px;
+}
+
+.profiles a {
+  color: var(--accent);
+  margin-right: 15px;
+  text-decoration: none;
+  transition: 0.3s;
+}
+
+.profiles a:hover {
+  color: #fff;
+}
+
+/* Footer */
+footer {
+  text-align: center;
+  padding: 20px;
+  color: #999;
+  background: rgba(255, 255, 255, 0.03);
+}
