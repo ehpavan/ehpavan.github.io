@@ -29,8 +29,7 @@ blogs.forEach(async (b) => {
         <h2>${b.title}</h2>
       </a>
       <p class="meta">
-        <img src="images/date-range-svgrepo-com.svg" alt="Date Icon"> ${formattedDate} &nbsp; 
-        <img src="images/time-svgrepo-com.svg" alt="Time Icon"> ${minutes} min read
+        📅 ${formattedDate} &nbsp; ⏱️ ${minutes} min read
       </p>
     `;
     blogList.appendChild(card);
