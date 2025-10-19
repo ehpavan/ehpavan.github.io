@@ -1,4 +1,4 @@
-// Blog Grid
+// Blog list with title, date, and file
 const blogs = [
   { title: "Building Secure APIs", file: "first-blog.md", date: "2025-10-17" },
   { title: "Web Recon 101", file: "second-blog.md", date: "2025-10-18" },
@@ -15,7 +15,7 @@ function estimateReadingTime(text) {
 
 blogs.forEach(async (b) => {
   try {
-    const res = await fetch(b.file);
+    const res = await fetch(`./${b.file}`);
     const content = await res.text();
     const minutes = estimateReadingTime(content);
 
@@ -28,9 +28,7 @@ blogs.forEach(async (b) => {
       <a href="blog.html?file=${b.file}" target="_blank">
         <h2>${b.title}</h2>
       </a>
-      <p class="meta">
-        📅 ${formattedDate} &nbsp; ⏱️ ${minutes} min read
-      </p>
+      <p class="meta">📅 ${formattedDate} &nbsp; ⏱️ ${minutes} min read</p>
     `;
     blogList.appendChild(card);
   } catch(err) {
