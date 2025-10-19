@@ -6,27 +6,98 @@
   <title>Pavan | Cybersecurity Enthusiast</title>
   <link rel="stylesheet" href="style.css">
   <style>
-    /* only for profile icons layout, no color changes */
+    /* === Smooth futuristic enhancements === */
+    .about {
+      position: relative;
+      margin-top: 50px;
+      padding: 30px;
+      border-radius: 12px;
+      backdrop-filter: blur(8px);
+      transition: all 0.4s ease;
+    }
+
+    .about h2 {
+      font-size: 1.8rem;
+      margin-bottom: 15px;
+      text-transform: uppercase;
+      letter-spacing: 1px;
+    }
+
+    .about p {
+      line-height: 1.7;
+      opacity: 0;
+      transform: translateY(20px);
+      animation: fadeUp 1s ease forwards 0.3s;
+    }
+
+    @keyframes fadeUp {
+      to {
+        opacity: 1;
+        transform: translateY(0);
+      }
+    }
+
+    /* Subtle typing-style underline for headings */
+    .about h2::after {
+      content: "_";
+      animation: blink 1s infinite;
+      margin-left: 4px;
+      opacity: 0.6;
+    }
+
+    @keyframes blink {
+      50% {
+        opacity: 0;
+      }
+    }
+
+    /* === Profiles Section Styling === */
+    .about h3 {
+      margin-top: 35px;
+      font-size: 1.5rem;
+      letter-spacing: 1px;
+      text-transform: uppercase;
+    }
+
     .profiles {
       display: flex;
-      flex-direction: column;
-      gap: 10px;
-      margin-top: 10px;
+      flex-wrap: wrap;
+      gap: 16px;
+      margin-top: 20px;
     }
 
     .profiles a {
       display: flex;
       align-items: center;
-      gap: 8px;
-      font-size: 1rem;
+      gap: 10px;
+      padding: 10px 15px;
+      border: 1px solid rgba(255, 255, 255, 0.1);
+      border-radius: 10px;
       text-decoration: none;
+      font-size: 1rem;
+      transition: all 0.3s ease;
+      background: rgba(255, 255, 255, 0.03);
+      backdrop-filter: blur(4px);
     }
 
     .profiles img {
       width: 22px;
       height: 22px;
-      vertical-align: middle;
+      filter: brightness(0.9);
+      transition: transform 0.3s ease, filter 0.3s ease;
     }
+
+    .profiles a:hover img {
+      transform: scale(1.1);
+      filter: brightness(1.3);
+    }
+
+    .profiles a:hover {
+      border-color: rgba(255, 255, 255, 0.3);
+      transform: translateY(-3px);
+      box-shadow: 0 0 10px rgba(255, 255, 255, 0.05);
+    }
+
   </style>
 </head>
 <body>
@@ -51,34 +122,29 @@
   <section id="about" class="about">
     <h2>About Me</h2>
     <p>
-      I'm Pavan — a <strong>16-year-old cybersecurity enthusiast</strong> with a strong foundation in
-      <strong>Python, Bash, SQL, API security, web security, Linux, and Active Directory</strong>.
-      I'm currently building <strong>ZeroClyne</strong> and actively doing <strong>bug bounty</strong> work.
-      I focus on automating complex security workflows and exploring next-generation approaches in vulnerability discovery and defense.
-      In the future I plan to learn <strong>AI</strong> and <strong>cloud security</strong> to expand my tooling and research capabilities.
+      I'm <strong>Pavan</strong> — a <strong>16-year-old cybersecurity enthusiast</strong> with a solid foundation in
+      <strong>Python, Bash, SQL, API Security, Web Security, Linux, and Active Directory</strong>.<br><br>
+      I'm currently building <strong>ZeroClyne</strong> — crafting tools to automate reconnaissance and security testing workflows.<br><br>
+      I actively participate in <strong>bug bounty</strong> programs, exploring web vulnerabilities and real-world attack surfaces.<br><br>
+      My vision is to evolve into a next-gen researcher by integrating <strong>AI</strong> and <strong>cloud security</strong> into future security automation frameworks.
     </p>
 
     <h3>Profiles</h3>
     <div class="profiles">
       <a href="https://github.com/ehpavan" target="_blank" rel="noopener noreferrer">
-        <img src="https://cdn.simpleicons.org/github/ffffff" alt="GitHub">
-        GitHub
+        <img src="https://cdn.simpleicons.org/github/ffffff" alt="GitHub"> GitHub
       </a>
       <a href="https://x.com/eh_pavan" target="_blank" rel="noopener noreferrer">
-        <img src="https://cdn.simpleicons.org/x/ffffff" alt="Twitter (X)">
-        Twitter
+        <img src="https://cdn.simpleicons.org/x/ffffff" alt="Twitter (X)"> Twitter
       </a>
       <a href="https://app.intigriti.com/profile/ehpavan" target="_blank" rel="noopener noreferrer">
-        <img src="https://cdn.simpleicons.org/intigriti/ffffff" alt="Intigriti">
-        Intigriti
+        <img src="https://cdn.simpleicons.org/intigriti/ffffff" alt="Intigriti"> Intigriti
       </a>
       <a href="https://hackerone.com/eh_pavan" target="_blank" rel="noopener noreferrer">
-        <img src="https://cdn.simpleicons.org/hackerone/ffffff" alt="HackerOne">
-        HackerOne
+        <img src="https://cdn.simpleicons.org/hackerone/ffffff" alt="HackerOne"> HackerOne
       </a>
       <a href="https://bugcrowd.com/eh_pavan" target="_blank" rel="noopener noreferrer">
-        <img src="https://cdn.simpleicons.org/bugcrowd/ffffff" alt="Bugcrowd">
-        Bugcrowd
+        <img src="https://cdn.simpleicons.org/bugcrowd/ffffff" alt="Bugcrowd"> Bugcrowd
       </a>
     </div>
   </section>
