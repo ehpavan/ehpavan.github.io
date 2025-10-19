@@ -1,34 +1,76 @@
-const blogs = [
-  { title: "Building Secure APIs", file: "first-blog.md", date: "2025-10-17" },
-  { title: "Web Recon 101", file: "second-blog.md", date: "2025-10-18" },
-  { title: "Advanced SQL Injection Notes", file: "third-blog.md", date: "2025-10-19" }
-];
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Blog | Pavan</title>
+<link rel="stylesheet" href="style.css">
+<script src="https://cdn.jsdelivr.net/npm/marked/marked.min.js"></script>
+<style>
+  .blog-meta {
+    display: flex;
+    align-items: center;
+    gap: 15px;
+    font-size: 0.9rem;
+    opacity: 0.7;
+    margin-bottom: 20px;
+  }
+  .blog-meta img {
+    width: 18px;
+    height: 18px;
+  }
+</style>
+</head>
+<body>
+<nav>
+  <a href="index.html">← Back to Blogs</a>
+</nav>
 
-const blogList = document.getElementById("blog-list");
+<div class="blog-content" id="blog-content">
+  <h2>Loading blog...</h2>
+</div>
 
-// Function to estimate reading time
+<script>
+const params = new URLSearchParams(window.location.search);
+const file = params.get('file');
+const contentDiv = document.getElementById('blog-content');
+
+// Map to store blog date for each file
+const blogDates = {
+  "first-blog.md": "2025-10-17",
+  "second-blog.md": "2025-10-18",
+  "third-blog.md": "2025-10-19"
+};
+
+// Reading time function
 function estimateReadingTime(text) {
   const wordsPerMinute = 200;
-  const wordCount = text.trim().split(/\s+/).length;
-  return Math.ceil(wordCount / wordsPerMinute);
+  const words = text.trim().split(/\s+/).length;
+  return Math.ceil(words / wordsPerMinute);
 }
 
-blogs.forEach(async (b) => {
-  const res = await fetch(b.file);
-  const content = await res.text();
-  const minutes = estimateReadingTime(content);
-
-  const dateObj = new Date(b.date);
-  const formattedDate = dateObj.toLocaleDateString("en-US", { year: "numeric", month: "short", day: "numeric" });
-
-  const card = document.createElement("div");
-  card.className = "blog-card";
-  card.innerHTML = `
-    <h2><a href="blog.html?file=${b.file}" target="_blank">${b.title}</a></h2>
-    <div class="meta">
-      <img src="https://cdn.simpleicons.org/calendar/ffffff" alt="Date Icon"> ${formattedDate}
-      <img src="https://cdn.simpleicons.org/clock/ffffff" alt="Reading Time Icon"> ${minutes} min read
-    </div>
-  `;
-  blogList.appendChild(card);
-});
+if(file){
+  fetch(file)
+    .then(res => res.text())
+    .then(md => {
+      const minutes = estimateReadingTime(md);
+      const date = new Date(blogDates[file]);
+      const formattedDate = date.toLocaleDateString("en-US",{year:"numeric",month:"short",day:"numeric"});
+      contentDiv.innerHTML = `
+        <div class="blog-meta">
+          <img src="https://cdn.simpleicons.org/calendar/ffffff" alt="Date Icon"> ${formattedDate}
+          <img src="https://cdn.simpleicons.org/clock/ffffff" alt="Reading Time Icon"> ${minutes} min read
+        </div>
+        ${marked.parse(md)}
+      `;
+    })
+    .catch(err=>{
+      contentDiv.innerHTML="<p>Failed to load blog. Check file path.</p>";
+      console.error(err);
+    });
+}else{
+  contentDiv.innerHTML="<p>No blog file specified.</p>";
+}
+</script>
+</body>
+</html>
