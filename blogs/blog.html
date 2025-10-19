@@ -16,12 +16,6 @@
     font-size: 0.9rem;
     opacity: 0.8;
   }
-  .blog-meta img {
-    width: 18px;
-    height: 18px;
-    vertical-align: middle;
-    margin-right: 5px; /* space between icon and text */
-  }
 </style>
 </head>
 <body>
@@ -48,8 +42,8 @@ const blogDates = {
 // Estimate reading time
 function estimateReadingTime(text) {
   const wordsPerMinute = 200;
-  const words = text.trim().split(/\s+/).length;
-  return Math.ceil(words / wordsPerMinute);
+  const wordCount = text.trim().split(/\s+/).length;
+  return Math.ceil(wordCount / wordsPerMinute);
 }
 
 if(file){
@@ -60,11 +54,10 @@ if(file){
       const date = new Date(blogDates[file]);
       const formattedDate = date.toLocaleDateString("en-US",{year:"numeric",month:"short",day:"numeric"});
       
-      // Meta with icons
+      // Meta with emojis instead of images
       const metaHTML = `
         <div class="blog-meta">
-          <img src="https://cdn.simpleicons.org/calendar/ffffff" alt="Date Icon"> ${formattedDate}
-          <img src="https://cdn.simpleicons.org/clock/ffffff" alt="Reading Time Icon"> ${minutes} min read
+          📅 ${formattedDate} &nbsp; ⏱️ ${minutes} min read
         </div>
       `;
       
