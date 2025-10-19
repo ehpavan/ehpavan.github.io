@@ -4,7 +4,7 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Blog | Pavan</title>
-<link rel="stylesheet" href="style.css">
+<link rel="stylesheet" href="../style.css">
 <script src="https://cdn.jsdelivr.net/npm/marked/marked.min.js"></script>
 <style>
   /* Meta info styling */
@@ -15,6 +15,12 @@
     margin-bottom: 20px;
     font-size: 0.9rem;
     opacity: 0.8;
+  }
+  .blog-meta img {
+    width: 18px;
+    height: 18px;
+    vertical-align: middle;
+    margin-right: 5px;
   }
 </style>
 </head>
@@ -54,10 +60,11 @@ if(file){
       const date = new Date(blogDates[file]);
       const formattedDate = date.toLocaleDateString("en-US",{year:"numeric",month:"short",day:"numeric"});
       
-      // Meta with emojis instead of images
+      // Meta with SVG icons
       const metaHTML = `
         <div class="blog-meta">
-          📅 ${formattedDate} &nbsp; ⏱️ ${minutes} min read
+          <img src="images/date-range-svgrepo-com.svg" alt="Date Icon"> ${formattedDate} &nbsp;
+          <img src="images/time-svgrepo-com.svg" alt="Time Icon"> ${minutes} min read
         </div>
       `;
       
