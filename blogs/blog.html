@@ -7,10 +7,10 @@
 <link rel="stylesheet" href="style.css">
 <script src="https://cdn.jsdelivr.net/npm/marked/marked.min.js"></script>
 <style>
-/* Ensure all code blocks have consistent blue theme */
+/* Plain code blocks (no blue background, no blue text) */
 pre, pre code {
-  background-color: #001f3f; /* keep your previous blue */
-  color: #00f;
+  background-color: transparent; /* keep it blank */
+  color: inherit; /* normal text color */
   padding: 10px;
   border-radius: 5px;
   overflow-x: auto;
@@ -20,7 +20,7 @@ pre, pre code {
   word-wrap: break-word;
 }
 
-/* Optional subtle animation */
+/* Optional subtle fade-in animation for blog content */
 .blog-content {
   transition: opacity 0.5s ease, transform 0.5s ease;
   opacity: 0;
@@ -53,12 +53,13 @@ if(file){
       return res.text();
     })
     .then(md => {
-      // Render markdown
+      // Render Markdown
       contentDiv.innerHTML = marked.parse(md);
 
-      // Make sure CSS applies to all code blocks
+      // Ensure all code blocks are plain
       document.querySelectorAll("pre code").forEach((block) => {
-        block.classList.add("markdown-code"); // optional class for extra control
+        block.style.background = "transparent";
+        block.style.color = "inherit";
       });
 
       // Fade-in animation
@@ -74,3 +75,4 @@ if(file){
 </script>
 </body>
 </html>
+
