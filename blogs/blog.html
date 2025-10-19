@@ -6,6 +6,31 @@
 <title>Blog | Pavan</title>
 <link rel="stylesheet" href="style.css">
 <script src="https://cdn.jsdelivr.net/npm/marked/marked.min.js"></script>
+<style>
+/* Ensure all code blocks have consistent blue theme */
+pre, pre code {
+  background-color: #001f3f; /* keep your previous blue */
+  color: #00f;
+  padding: 10px;
+  border-radius: 5px;
+  overflow-x: auto;
+  display: block;
+  font-family: monospace;
+  white-space: pre-wrap;
+  word-wrap: break-word;
+}
+
+/* Optional subtle animation */
+.blog-content {
+  transition: opacity 0.5s ease, transform 0.5s ease;
+  opacity: 0;
+  transform: translateY(20px);
+}
+.blog-content.visible {
+  opacity: 1;
+  transform: translateY(0);
+}
+</style>
 </head>
 <body>
 <nav>
@@ -28,13 +53,16 @@ if(file){
       return res.text();
     })
     .then(md => {
-      // Parse markdown using marked.js
+      // Render markdown
       contentDiv.innerHTML = marked.parse(md);
 
-      // Optional: keep code blocks styled by your style.css
+      // Make sure CSS applies to all code blocks
       document.querySelectorAll("pre code").forEach((block) => {
-        block.style.background = ""; // keep previous theme bg
+        block.classList.add("markdown-code"); // optional class for extra control
       });
+
+      // Fade-in animation
+      setTimeout(()=> contentDiv.classList.add('visible'), 50);
     })
     .catch(err=>{
       contentDiv.innerHTML="<p>Failed to load blog. Check file path.</p>";
