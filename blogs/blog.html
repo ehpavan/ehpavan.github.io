@@ -7,17 +7,20 @@
 <link rel="stylesheet" href="style.css">
 <script src="https://cdn.jsdelivr.net/npm/marked/marked.min.js"></script>
 <style>
+  /* Meta info styling */
   .blog-meta {
     display: flex;
     align-items: center;
-    gap: 15px;
-    font-size: 0.9rem;
-    opacity: 0.7;
+    gap: 15px;       /* space between date and reading time */
     margin-bottom: 20px;
+    font-size: 0.9rem;
+    opacity: 0.8;
   }
   .blog-meta img {
     width: 18px;
     height: 18px;
+    vertical-align: middle;
+    margin-right: 5px; /* space between icon and text */
   }
 </style>
 </head>
@@ -35,14 +38,14 @@ const params = new URLSearchParams(window.location.search);
 const file = params.get('file');
 const contentDiv = document.getElementById('blog-content');
 
-// Map to store blog date for each file
+// Map to store blog dates for each file
 const blogDates = {
   "first-blog.md": "2025-10-17",
   "second-blog.md": "2025-10-18",
   "third-blog.md": "2025-10-19"
 };
 
-// Reading time function
+// Estimate reading time
 function estimateReadingTime(text) {
   const wordsPerMinute = 200;
   const words = text.trim().split(/\s+/).length;
@@ -56,13 +59,16 @@ if(file){
       const minutes = estimateReadingTime(md);
       const date = new Date(blogDates[file]);
       const formattedDate = date.toLocaleDateString("en-US",{year:"numeric",month:"short",day:"numeric"});
-      contentDiv.innerHTML = `
+      
+      // Meta with icons
+      const metaHTML = `
         <div class="blog-meta">
           <img src="https://cdn.simpleicons.org/calendar/ffffff" alt="Date Icon"> ${formattedDate}
           <img src="https://cdn.simpleicons.org/clock/ffffff" alt="Reading Time Icon"> ${minutes} min read
         </div>
-        ${marked.parse(md)}
       `;
+      
+      contentDiv.innerHTML = metaHTML + marked.parse(md);
     })
     .catch(err=>{
       contentDiv.innerHTML="<p>Failed to load blog. Check file path.</p>";
