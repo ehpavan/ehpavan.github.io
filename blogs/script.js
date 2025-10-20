@@ -3,7 +3,7 @@ const blogs = [
   { title: "Building Secure APIs", file: "first-blog.md", date: "2025-10-17" },
   { title: "Web Recon 101", file: "second-blog.md", date: "2025-10-18" },
   { title: "Advanced SQL Injection Notes", file: "third-blog.md", date: "2025-10-19" }
-    { title: "Hacking the Internet, The Untold Story Of a Hero", file: "fourth-blog.md", date: "2025-10-20" }
+  { title: "Hacking the Internet, The Untold Story Of a Hero", file: "fourth-blog.md", date: "2025-10-20" }
 
 ];
 
