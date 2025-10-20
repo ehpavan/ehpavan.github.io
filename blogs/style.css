@@ -17,10 +17,11 @@ h1 {
   text-align:center;
 }
 
+/* Blog List - Vertical layout */
 #blog-list {
-  display:grid;
-  grid-template-columns:repeat(auto-fit,minmax(320px,1fr));
-  gap:20px;
+  display:flex;
+  flex-direction:column; /* stack vertically */
+  gap:20px; /* space between blogs */
   margin-top:40px;
 }
 
@@ -31,7 +32,9 @@ h1 {
   transition:0.3s;
 }
 
-.blog-card:hover { transform: scale(1.03); }
+.blog-card:hover { 
+  transform: scale(1.03); 
+}
 
 .blog-card a {
   text-decoration:none;
@@ -76,4 +79,6 @@ h1 {
   overflow-x:auto;
 }
 
-.blog-content code { color:#00ffd9; }
+.blog-content code { 
+  color:#00ffd9; 
+}
