@@ -31,12 +31,28 @@ pre, pre code {
   transform: translateY(0);
 }
 
-/* Automatic meta for date & read time */
+/* Rich minimal meta for date & read time */
 .blog-meta {
   font-size: 0.9rem;
-  color: #999;
-  margin-bottom: 10px;
-  font-style: italic;
+  color: #888;
+  margin-bottom: 12px;
+  font-style: normal;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  font-weight: 500;
+}
+
+.blog-meta::before {
+  content: "⏱"; /* time icon */
+  font-size: 0.85rem;
+  color: #aaa;
+}
+
+.blog-meta::after {
+  content: "•"; /* subtle separator */
+  margin: 0 6px;
+  color: #ccc;
 }
 </style>
 </head>
@@ -71,7 +87,6 @@ if(file){
       });
 
       // --- AUTOMATIC DATE & READ TIME ---
-      // Count words excluding code blocks
       const textOnly = md.replace(/```[\s\S]*?```/g, '');
       const wordCount = textOnly.trim().split(/\s+/).length;
       const readTime = Math.max(1, Math.ceil(wordCount / 200)); // 200 wpm
@@ -79,9 +94,10 @@ if(file){
       const options = { year: 'numeric', month: 'short', day: 'numeric' };
       const dateStr = today.toLocaleDateString('en-US', options);
 
+      // Create rich meta
       const meta = document.createElement('p');
       meta.className = 'blog-meta';
-      meta.textContent = `${dateStr} · ${readTime} min read`;
+      meta.innerHTML = `${dateStr} · ${readTime} min read`;
       contentDiv.prepend(meta);
 
       // Fade-in animation
