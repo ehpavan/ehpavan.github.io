@@ -7,10 +7,10 @@
 <link rel="stylesheet" href="style.css">
 <script src="https://cdn.jsdelivr.net/npm/marked/marked.min.js"></script>
 <style>
-/* Plain code blocks (no blue background, no blue text) */
+/* Plain code blocks (no blue background, no color) */
 pre, pre code {
-  background-color: transparent; /* keep it blank */
-  color: inherit; /* normal text color */
+  background-color: transparent;
+  color: inherit;
   padding: 10px;
   border-radius: 5px;
   overflow-x: auto;
@@ -20,7 +20,7 @@ pre, pre code {
   word-wrap: break-word;
 }
 
-/* Optional subtle fade-in animation for blog content */
+/* Fade-in animation for blog content */
 .blog-content {
   transition: opacity 0.5s ease, transform 0.5s ease;
   opacity: 0;
@@ -29,6 +29,14 @@ pre, pre code {
 .blog-content.visible {
   opacity: 1;
   transform: translateY(0);
+}
+
+/* Automatic meta for date & read time */
+.blog-meta {
+  font-size: 0.9rem;
+  color: #999;
+  margin-bottom: 10px;
+  font-style: italic;
 }
 </style>
 </head>
@@ -56,11 +64,25 @@ if(file){
       // Render Markdown
       contentDiv.innerHTML = marked.parse(md);
 
-      // Ensure all code blocks are plain
-      document.querySelectorAll("pre code").forEach((block) => {
+      // Plain code blocks
+      document.querySelectorAll("pre code").forEach(block => {
         block.style.background = "transparent";
         block.style.color = "inherit";
       });
+
+      // --- AUTOMATIC DATE & READ TIME ---
+      // Count words excluding code blocks
+      const textOnly = md.replace(/```[\s\S]*?```/g, '');
+      const wordCount = textOnly.trim().split(/\s+/).length;
+      const readTime = Math.max(1, Math.ceil(wordCount / 200)); // 200 wpm
+      const today = new Date();
+      const options = { year: 'numeric', month: 'short', day: 'numeric' };
+      const dateStr = today.toLocaleDateString('en-US', options);
+
+      const meta = document.createElement('p');
+      meta.className = 'blog-meta';
+      meta.textContent = `${dateStr} · ${readTime} min read`;
+      contentDiv.prepend(meta);
 
       // Fade-in animation
       setTimeout(()=> contentDiv.classList.add('visible'), 50);
@@ -75,4 +97,3 @@ if(file){
 </script>
 </body>
 </html>
-
