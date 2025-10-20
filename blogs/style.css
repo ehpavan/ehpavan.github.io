@@ -17,10 +17,10 @@ h1 {
   text-align:center;
 }
 
-/* Blog List - Vertical layout */
+/* Blog List - Always vertical */
 #blog-list {
   display:flex;
-  flex-direction:column; /* stack vertically */
+  flex-direction:column; /* stack vertically on all screens */
   gap:20px; /* space between blogs */
   margin-top:40px;
 }
