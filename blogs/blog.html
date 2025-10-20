@@ -31,7 +31,7 @@ pre, pre code {
   transform: translateY(0);
 }
 
-/* Static meta for date & read time */
+/* Meta info */
 .blog-meta {
   font-size: 0.95rem;
   color: #555;
@@ -51,6 +51,12 @@ pre, pre code {
 </div>
 
 <script>
+// Estimate reading time function
+function estimateReadingTime(text) {
+  const wordsPerMinute = 200;
+  return Math.ceil(text.trim().split(/\s+/).length / wordsPerMinute);
+}
+
 const params = new URLSearchParams(window.location.search);
 const file = params.get('file');
 const contentDiv = document.getElementById('blog-content');
@@ -71,10 +77,16 @@ if(file){
         block.style.color = "inherit";
       });
 
-      // --- STATIC DATE & READ TIME ---
+      // --- DYNAMIC DATE & READ TIME ---
       const meta = document.createElement('p');
       meta.className = 'blog-meta';
-      meta.textContent = "Oct 17, 2025 · 3 min read"; // static, just like before
+
+      // Use today's date as published date
+      const today = new Date();
+      const formattedDate = today.toLocaleDateString("en-US", {year:"numeric", month:"short", day:"numeric"});
+      const minutes = estimateReadingTime(md);
+
+      meta.textContent = `${formattedDate} · ${minutes} min read`;
       contentDiv.prepend(meta);
 
       // Fade-in animation
