@@ -4,7 +4,7 @@ const blogs = [
   { title: "Web Recon 101", file: "second-blog.md", date: "2025-10-18" },
   { title: "Advanced SQL Injection Notes", file: "third-blog.md", date: "2025-10-19" },
   { title: "Hacking the Internet, The Untold Story Of a Hero", file: "fourth-blog.md", date: "2025-10-20" }
-  { "title": "The Cyber Security Market is cooked, A New Era Of Evolution", "file": "fourth-blog.md", "date": "2025-10-25" }
+  { title: "The Cyber Security Market is cooked, A New Era Of Evolution", file: "fourth-blog.md", date: "2025-10-25" }
 ];
 
 const blogList = document.getElementById("blog-list");
