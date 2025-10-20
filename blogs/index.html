@@ -20,7 +20,14 @@
     border-radius: 12px;
     backdrop-filter: blur(6px);
     background: rgba(255,255,255,0.02);
-    transition: transform 0.3s ease, box-shadow 0.3s ease;
+    transition: transform 0.3s ease, box-shadow 0.3s ease, opacity 0.5s ease, transform 0.5s ease;
+    opacity: 0;
+    transform: translateY(20px);
+  }
+
+  .blog-card.show {
+    opacity: 1;
+    transform: translateY(0);
   }
 
   .blog-card:hover {
@@ -79,47 +86,62 @@
   <script>
   const blogList = document.getElementById("blog-list");
 
-  // Estimate reading time
   function estimateReadingTime(text) {
     const wordsPerMinute = 200;
     return Math.ceil(text.trim().split(/\s+/).length / wordsPerMinute);
   }
 
-  // Fetch blogs.json dynamically
-  fetch('blogs.json')
-    .then(res => res.json())
-    .then(blogs => {
-      // ✅ Sort blogs by date (newest first)
+  async function loadBlogs() {
+    try {
+      const res = await fetch('blogs.json');
+      const blogs = await res.json();
+
+      // Sort blogs by date (newest first)
       blogs.sort((a, b) => new Date(b.date) - new Date(a.date));
 
-      blogs.forEach(async (b) => {
+      // Fetch all blog contents sequentially
+      const blogData = [];
+      for (const b of blogs) {
         try {
           const res = await fetch(`./${b.file}`);
           const content = await res.text();
-          const minutes = estimateReadingTime(content);
-
-          const dateObj = new Date(b.date);
-          const formattedDate = dateObj.toLocaleDateString("en-US", {
-            year: "numeric",
-            month: "short",
-            day: "numeric"
-          });
-
-          const card = document.createElement("div");
-          card.className = "blog-card";
-          card.innerHTML = `
-            <a href="blog.html?file=${b.file}">
-              <h2>${b.title}</h2>
-            </a>
-            <p class="meta">${formattedDate} · ${minutes} min read</p>
-          `;
-          blogList.appendChild(card);
+          blogData.push({ ...b, content });
         } catch (err) {
-          console.error(err);
+          console.warn(`Failed to load ${b.file}`, err);
         }
+      }
+
+      // Append in sorted order with fade-in
+      blogData.forEach((b, i) => {
+        const minutes = estimateReadingTime(b.content);
+        const dateObj = new Date(b.date);
+        const formattedDate = dateObj.toLocaleDateString("en-US", {
+          year: "numeric",
+          month: "short",
+          day: "numeric"
+        });
+
+        const card = document.createElement("div");
+        card.className = "blog-card";
+        card.innerHTML = `
+          <a href="blog.html?file=${b.file}">
+            <h2>${b.title}</h2>
+          </a>
+          <p class="meta">${formattedDate} · ${minutes} min read</p>
+        `;
+
+        blogList.appendChild(card);
+
+        // Fade-in with delay
+        setTimeout(() => card.classList.add("show"), i * 150);
       });
-    })
-    .catch(err => console.error("Failed to load blogs.json", err));
+
+    } catch (err) {
+      console.error("Failed to load blogs.json", err);
+    }
+  }
+
+  document.addEventListener("DOMContentLoaded", loadBlogs);
   </script>
 </body>
 </html>
