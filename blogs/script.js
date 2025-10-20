@@ -4,7 +4,7 @@ const blogs = [
   { title: "Web Recon 101", file: "second-blog.md", date: "2025-10-18" },
   { title: "Advanced SQL Injection Notes", file: "third-blog.md", date: "2025-10-19" },
   { title: "Hacking the Internet, The Untold Story Of a Hero", file: "fourth-blog.md", date: "2025-10-20" },
-  { title: "The Cyber Security Market is cooked, A New Era Of Evolution", file: "fifth-blog.md", date: "2025-10-25" }
+  { title: "ZeroClyne Vision — Building Continuous Security", file: "fifth-blog.md", date: "2025-10-25" } // new blog
 ];
 
 const blogList = document.getElementById("blog-list");
@@ -16,16 +16,20 @@ function estimateReadingTime(text) {
 }
 
 async function loadBlogs() {
-  // Sort blogs by date (newest first)
-  blogs.sort((a, b) => new Date(b.date) - new Date(a.date));
+  try {
+    // Sort blogs by date (newest first) using Date.parse()
+    blogs.sort((a, b) => Date.parse(b.date) - Date.parse(a.date));
 
-  // Hide list before rendering (to prevent flicker)
-  blogList.style.opacity = "0";
-  blogList.style.transform = "translateY(20px)";
+    // Hide list before rendering
+    blogList.style.opacity = "0";
+    blogList.style.transform = "translateY(20px)";
 
-  for (const b of blogs) {
-    try {
+    for (const b of blogs) {
       const res = await fetch(`./${b.file}`);
+      if (!res.ok) {
+        console.warn(`Blog file not found: ${b.file}`);
+        continue;
+      }
       const content = await res.text();
       const minutes = estimateReadingTime(content);
 
@@ -46,17 +50,18 @@ async function loadBlogs() {
       `;
 
       blogList.appendChild(card);
-    } catch (err) {
-      console.error(err);
     }
-  }
 
-  // Smooth fade + slide animation after rendering
-  requestAnimationFrame(() => {
-    blogList.style.transition = "opacity 0.6s ease, transform 0.6s ease";
-    blogList.style.opacity = "1";
-    blogList.style.transform = "translateY(0)";
-  });
+    // Smooth fade + slide animation
+    requestAnimationFrame(() => {
+      blogList.style.transition = "opacity 0.6s ease, transform 0.6s ease";
+      blogList.style.opacity = "1";
+      blogList.style.transform = "translateY(0)";
+    });
+
+  } catch (err) {
+    console.error("Error loading blogs:", err);
+  }
 }
 
 // Initialize blogs on DOM load
