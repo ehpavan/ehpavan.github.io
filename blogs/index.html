@@ -19,18 +19,18 @@
 
   section.hero p {
     max-width: 800px;
-    margin: 0 auto; /* center the text */
+    margin: 0 auto;
     font-size: 1.05rem;
     line-height: 1.5;
   }
 
-  /* Blog list as vertical column, centered and medium-like width */
+  /* Blog list as vertical column, centered */
   #blog-list {
     display: flex;
     flex-direction: column;
     gap: 30px; /* space between blogs */
-    max-width: 800px; /* center the list like Medium */
-    margin: 40px auto 0 auto; /* auto left/right centers the list */
+    max-width: 700px; /* medium horizontal width */
+    margin: 40px auto 0 auto; /* center the list */
     padding: 0 10px;
   }
 
@@ -108,7 +108,7 @@
           const card = document.createElement("div");
           card.className = "blog-card";
           card.innerHTML = `
-            <a href="blog.html?file=${b.file}" target="_blank">
+            <a href="blog.html?file=${b.file}">
               <h2>${b.title}</h2>
             </a>
             <p class="meta">${formattedDate} · ${minutes} min read</p>
