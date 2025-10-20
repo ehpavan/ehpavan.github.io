@@ -7,7 +7,7 @@
 <link rel="stylesheet" href="style.css">
 <script src="https://cdn.jsdelivr.net/npm/marked/marked.min.js"></script>
 <style>
-/* Plain code blocks (no blue background, no color) */
+/* Plain code blocks */
 pre, pre code {
   background-color: transparent;
   color: inherit;
@@ -31,28 +31,13 @@ pre, pre code {
   transform: translateY(0);
 }
 
-/* Rich minimal meta for date & read time */
+/* Static meta for date & read time */
 .blog-meta {
-  font-size: 0.9rem;
-  color: #888;
+  font-size: 0.95rem;
+  color: #555;
   margin-bottom: 12px;
   font-style: normal;
-  display: flex;
-  align-items: center;
-  gap: 8px;
   font-weight: 500;
-}
-
-.blog-meta::before {
-  content: "⏱"; /* time icon */
-  font-size: 0.85rem;
-  color: #aaa;
-}
-
-.blog-meta::after {
-  content: "•"; /* subtle separator */
-  margin: 0 6px;
-  color: #ccc;
 }
 </style>
 </head>
@@ -86,18 +71,10 @@ if(file){
         block.style.color = "inherit";
       });
 
-      // --- AUTOMATIC DATE & READ TIME ---
-      const textOnly = md.replace(/```[\s\S]*?```/g, '');
-      const wordCount = textOnly.trim().split(/\s+/).length;
-      const readTime = Math.max(1, Math.ceil(wordCount / 200)); // 200 wpm
-      const today = new Date();
-      const options = { year: 'numeric', month: 'short', day: 'numeric' };
-      const dateStr = today.toLocaleDateString('en-US', options);
-
-      // Create rich meta
+      // --- STATIC DATE & READ TIME ---
       const meta = document.createElement('p');
       meta.className = 'blog-meta';
-      meta.innerHTML = `${dateStr} · ${readTime} min read`;
+      meta.textContent = "Oct 17, 2025 · 3 min read"; // static, just like before
       contentDiv.prepend(meta);
 
       // Fade-in animation
