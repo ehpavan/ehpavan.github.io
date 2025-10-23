@@ -7,6 +7,48 @@
 <link rel="stylesheet" href="style.css">
 <script src="https://cdn.jsdelivr.net/npm/marked/marked.min.js"></script>
 <style>
+/* Default dark theme */
+body {
+  background-color: #000;
+  color: #fff;
+  transition: background-color 0.4s ease, color 0.4s ease;
+}
+
+/* Light theme */
+body.light {
+  background-color: #fff;
+  color: #000;
+}
+
+/* Navbar */
+nav {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 20px;
+}
+nav a {
+  color: inherit;
+  text-decoration: none;
+  font-weight: 500;
+}
+nav a:hover {
+  opacity: 0.8;
+}
+
+/* Theme toggle button */
+.theme-toggle {
+  cursor: pointer;
+  border: none;
+  background: none;
+  color: inherit;
+  font-size: 1.4rem;
+  transition: transform 0.3s ease;
+}
+.theme-toggle:hover {
+  transform: rotate(20deg);
+}
+
 /* Plain code blocks */
 pre, pre code {
   background-color: transparent;
@@ -34,16 +76,20 @@ pre, pre code {
 /* Meta info */
 .blog-meta {
   font-size: 0.95rem;
-  color: #555;
+  color: #888;
   margin-bottom: 12px;
   font-style: normal;
   font-weight: 500;
+}
+body.light .blog-meta {
+  color: #555;
 }
 </style>
 </head>
 <body>
 <nav>
   <a href="index.html">← Back to Blogs</a>
+  <button class="theme-toggle" id="theme-toggle" title="Toggle theme">🌙</button>
 </nav>
 
 <div class="blog-content" id="blog-content">
@@ -51,53 +97,73 @@ pre, pre code {
 </div>
 
 <script>
-// Estimate reading time function
+// --- THEME TOGGLE SYSTEM ---
+const themeToggle = document.getElementById("theme-toggle");
+const savedTheme = localStorage.getItem("theme");
+
+// Apply saved theme
+if (savedTheme === "light") {
+  document.body.classList.add("light");
+  themeToggle.textContent = "☀️";
+} else {
+  themeToggle.textContent = "🌙";
+}
+
+// Toggle theme on click
+themeToggle.addEventListener("click", () => {
+  document.body.classList.toggle("light");
+  const isLight = document.body.classList.contains("light");
+  themeToggle.textContent = isLight ? "☀️" : "🌙";
+  localStorage.setItem("theme", isLight ? "light" : "dark");
+});
+
+// --- BLOG RENDERING LOGIC ---
 function estimateReadingTime(text) {
   const wordsPerMinute = 200;
   return Math.ceil(text.trim().split(/\s+/).length / wordsPerMinute);
 }
 
 const params = new URLSearchParams(window.location.search);
-const file = params.get('file');
-const contentDiv = document.getElementById('blog-content');
+const file = params.get("file");
+const contentDiv = document.getElementById("blog-content");
 
-if(file){
+if (file) {
   fetch(`./${file}`)
-    .then(res => {
-      if(!res.ok) throw new Error("Failed to load file");
+    .then((res) => {
+      if (!res.ok) throw new Error("Failed to load file");
       return res.text();
     })
-    .then(md => {
-      // Render Markdown
+    .then((md) => {
       contentDiv.innerHTML = marked.parse(md);
 
       // Plain code blocks
-      document.querySelectorAll("pre code").forEach(block => {
+      document.querySelectorAll("pre code").forEach((block) => {
         block.style.background = "transparent";
         block.style.color = "inherit";
       });
 
-      // --- DYNAMIC DATE & READ TIME ---
-      const meta = document.createElement('p');
-      meta.className = 'blog-meta';
-
-      // Use today's date as published date
+      // Dynamic meta info
+      const meta = document.createElement("p");
+      meta.className = "blog-meta";
       const today = new Date();
-      const formattedDate = today.toLocaleDateString("en-US", {year:"numeric", month:"short", day:"numeric"});
+      const formattedDate = today.toLocaleDateString("en-US", {
+        year: "numeric",
+        month: "short",
+        day: "numeric",
+      });
       const minutes = estimateReadingTime(md);
-
       meta.textContent = `${formattedDate} · ${minutes} min read`;
       contentDiv.prepend(meta);
 
-      // Fade-in animation
-      setTimeout(()=> contentDiv.classList.add('visible'), 50);
+      // Fade-in effect
+      setTimeout(() => contentDiv.classList.add("visible"), 50);
     })
-    .catch(err=>{
-      contentDiv.innerHTML="<p>Failed to load blog. Check file path.</p>";
+    .catch((err) => {
+      contentDiv.innerHTML = "<p>Failed to load blog. Check file path.</p>";
       console.error(err);
     });
-}else{
-  contentDiv.innerHTML="<p>No blog file specified.</p>";
+} else {
+  contentDiv.innerHTML = "<p>No blog file specified.</p>";
 }
 </script>
 </body>
