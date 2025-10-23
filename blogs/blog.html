@@ -7,70 +7,20 @@
 <link rel="stylesheet" href="style.css">
 <script src="https://cdn.jsdelivr.net/npm/marked/marked.min.js"></script>
 <style>
-/* Base theme (white background) */
-body {
-  background-color: #fff;
-  color: #111;
-  transition: color 0.4s ease, background-color 0.4s ease;
-  font-family: "Inter", sans-serif;
-  line-height: 1.6;
-}
-
-/* Light-text reading mode */
-body.soft {
-  color: #888;
-}
-
-/* Navbar */
-nav {
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-  padding: 20px;
-}
-nav a {
-  color: inherit;
-  text-decoration: none;
-  font-weight: 500;
-}
-nav a:hover {
-  opacity: 0.8;
-}
-
-/* Toggle Button */
-.theme-toggle {
-  cursor: pointer;
-  border: none;
-  background: none;
-  color: inherit;
-  font-size: 1.4rem;
-  transition: transform 0.3s ease;
-}
-.theme-toggle:hover {
-  transform: rotate(15deg);
-}
-
-/* Code blocks */
+/* Plain code blocks */
 pre, pre code {
-  background-color: #f6f8fa;
-  color: #000;
+  background-color: transparent;
+  color: inherit;
   padding: 10px;
-  border-radius: 6px;
+  border-radius: 5px;
   overflow-x: auto;
   display: block;
   font-family: monospace;
   white-space: pre-wrap;
   word-wrap: break-word;
-  transition: background-color 0.3s ease, color 0.3s ease;
 }
 
-/* In soft mode: make text & code lighter */
-body.soft pre, body.soft pre code {
-  background-color: #f0f0f0;
-  color: #666;
-}
-
-/* Blog fade-in */
+/* Fade-in animation for blog content */
 .blog-content {
   transition: opacity 0.5s ease, transform 0.5s ease;
   opacity: 0;
@@ -84,20 +34,16 @@ body.soft pre, body.soft pre code {
 /* Meta info */
 .blog-meta {
   font-size: 0.95rem;
-  color: #666;
+  color: #555;
   margin-bottom: 12px;
   font-style: normal;
   font-weight: 500;
-}
-body.soft .blog-meta {
-  color: #999;
 }
 </style>
 </head>
 <body>
 <nav>
   <a href="index.html">← Back to Blogs</a>
-  <button class="theme-toggle" id="theme-toggle" title="Toggle text contrast">🌓</button>
 </nav>
 
 <div class="blog-content" id="blog-content">
@@ -105,67 +51,53 @@ body.soft .blog-meta {
 </div>
 
 <script>
-// --- TEXT CONTRAST TOGGLE SYSTEM ---
-const themeToggle = document.getElementById("theme-toggle");
-const savedMode = localStorage.getItem("textMode");
-
-// Apply saved mode
-if (savedMode === "soft") {
-  document.body.classList.add("soft");
-  themeToggle.textContent = "🌞";
-} else {
-  themeToggle.textContent = "🌓";
-}
-
-// Toggle mode on click
-themeToggle.addEventListener("click", () => {
-  document.body.classList.toggle("soft");
-  const isSoft = document.body.classList.contains("soft");
-  themeToggle.textContent = isSoft ? "🌞" : "🌓";
-  localStorage.setItem("textMode", isSoft ? "soft" : "dark");
-});
-
-// --- BLOG RENDERING LOGIC ---
+// Estimate reading time function
 function estimateReadingTime(text) {
   const wordsPerMinute = 200;
   return Math.ceil(text.trim().split(/\s+/).length / wordsPerMinute);
 }
 
 const params = new URLSearchParams(window.location.search);
-const file = params.get("file");
-const contentDiv = document.getElementById("blog-content");
+const file = params.get('file');
+const contentDiv = document.getElementById('blog-content');
 
-if (file) {
+if(file){
   fetch(`./${file}`)
-    .then((res) => {
-      if (!res.ok) throw new Error("Failed to load file");
+    .then(res => {
+      if(!res.ok) throw new Error("Failed to load file");
       return res.text();
     })
-    .then((md) => {
+    .then(md => {
+      // Render Markdown
       contentDiv.innerHTML = marked.parse(md);
 
-      // Reading time
-      const meta = document.createElement("p");
-      meta.className = "blog-meta";
-      const today = new Date();
-      const formattedDate = today.toLocaleDateString("en-US", {
-        year: "numeric",
-        month: "short",
-        day: "numeric",
+      // Plain code blocks
+      document.querySelectorAll("pre code").forEach(block => {
+        block.style.background = "transparent";
+        block.style.color = "inherit";
       });
+
+      // --- DYNAMIC DATE & READ TIME ---
+      const meta = document.createElement('p');
+      meta.className = 'blog-meta';
+
+      // Use today's date as published date
+      const today = new Date();
+      const formattedDate = today.toLocaleDateString("en-US", {year:"numeric", month:"short", day:"numeric"});
       const minutes = estimateReadingTime(md);
+
       meta.textContent = `${formattedDate} · ${minutes} min read`;
       contentDiv.prepend(meta);
 
       // Fade-in animation
-      setTimeout(() => contentDiv.classList.add("visible"), 50);
+      setTimeout(()=> contentDiv.classList.add('visible'), 50);
     })
-    .catch((err) => {
-      contentDiv.innerHTML = "<p>Failed to load blog. Check file path.</p>";
+    .catch(err=>{
+      contentDiv.innerHTML="<p>Failed to load blog. Check file path.</p>";
       console.error(err);
     });
-} else {
-  contentDiv.innerHTML = "<p>No blog file specified.</p>";
+}else{
+  contentDiv.innerHTML="<p>No blog file specified.</p>";
 }
 </script>
 </body>
