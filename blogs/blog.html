@@ -7,17 +7,18 @@
 <link rel="stylesheet" href="style.css">
 <script src="https://cdn.jsdelivr.net/npm/marked/marked.min.js"></script>
 <style>
-/* Default dark theme */
+/* Base theme (white background) */
 body {
-  background-color: #000;
-  color: #fff;
-  transition: background-color 0.4s ease, color 0.4s ease;
+  background-color: #fff;
+  color: #111;
+  transition: color 0.4s ease, background-color 0.4s ease;
+  font-family: "Inter", sans-serif;
+  line-height: 1.6;
 }
 
-/* Light theme */
-body.light {
-  background-color: #fff;
-  color: #000;
+/* Light-text reading mode */
+body.soft {
+  color: #888;
 }
 
 /* Navbar */
@@ -36,7 +37,7 @@ nav a:hover {
   opacity: 0.8;
 }
 
-/* Theme toggle button */
+/* Toggle Button */
 .theme-toggle {
   cursor: pointer;
   border: none;
@@ -46,23 +47,30 @@ nav a:hover {
   transition: transform 0.3s ease;
 }
 .theme-toggle:hover {
-  transform: rotate(20deg);
+  transform: rotate(15deg);
 }
 
-/* Plain code blocks */
+/* Code blocks */
 pre, pre code {
-  background-color: transparent;
-  color: inherit;
+  background-color: #f6f8fa;
+  color: #000;
   padding: 10px;
-  border-radius: 5px;
+  border-radius: 6px;
   overflow-x: auto;
   display: block;
   font-family: monospace;
   white-space: pre-wrap;
   word-wrap: break-word;
+  transition: background-color 0.3s ease, color 0.3s ease;
 }
 
-/* Fade-in animation for blog content */
+/* In soft mode: make text & code lighter */
+body.soft pre, body.soft pre code {
+  background-color: #f0f0f0;
+  color: #666;
+}
+
+/* Blog fade-in */
 .blog-content {
   transition: opacity 0.5s ease, transform 0.5s ease;
   opacity: 0;
@@ -76,20 +84,20 @@ pre, pre code {
 /* Meta info */
 .blog-meta {
   font-size: 0.95rem;
-  color: #888;
+  color: #666;
   margin-bottom: 12px;
   font-style: normal;
   font-weight: 500;
 }
-body.light .blog-meta {
-  color: #555;
+body.soft .blog-meta {
+  color: #999;
 }
 </style>
 </head>
 <body>
 <nav>
   <a href="index.html">← Back to Blogs</a>
-  <button class="theme-toggle" id="theme-toggle" title="Toggle theme">🌙</button>
+  <button class="theme-toggle" id="theme-toggle" title="Toggle text contrast">🌓</button>
 </nav>
 
 <div class="blog-content" id="blog-content">
@@ -97,24 +105,24 @@ body.light .blog-meta {
 </div>
 
 <script>
-// --- THEME TOGGLE SYSTEM ---
+// --- TEXT CONTRAST TOGGLE SYSTEM ---
 const themeToggle = document.getElementById("theme-toggle");
-const savedTheme = localStorage.getItem("theme");
+const savedMode = localStorage.getItem("textMode");
 
-// Apply saved theme
-if (savedTheme === "light") {
-  document.body.classList.add("light");
-  themeToggle.textContent = "☀️";
+// Apply saved mode
+if (savedMode === "soft") {
+  document.body.classList.add("soft");
+  themeToggle.textContent = "🌞";
 } else {
-  themeToggle.textContent = "🌙";
+  themeToggle.textContent = "🌓";
 }
 
-// Toggle theme on click
+// Toggle mode on click
 themeToggle.addEventListener("click", () => {
-  document.body.classList.toggle("light");
-  const isLight = document.body.classList.contains("light");
-  themeToggle.textContent = isLight ? "☀️" : "🌙";
-  localStorage.setItem("theme", isLight ? "light" : "dark");
+  document.body.classList.toggle("soft");
+  const isSoft = document.body.classList.contains("soft");
+  themeToggle.textContent = isSoft ? "🌞" : "🌓";
+  localStorage.setItem("textMode", isSoft ? "soft" : "dark");
 });
 
 // --- BLOG RENDERING LOGIC ---
@@ -136,13 +144,7 @@ if (file) {
     .then((md) => {
       contentDiv.innerHTML = marked.parse(md);
 
-      // Plain code blocks
-      document.querySelectorAll("pre code").forEach((block) => {
-        block.style.background = "transparent";
-        block.style.color = "inherit";
-      });
-
-      // Dynamic meta info
+      // Reading time
       const meta = document.createElement("p");
       meta.className = "blog-meta";
       const today = new Date();
@@ -155,7 +157,7 @@ if (file) {
       meta.textContent = `${formattedDate} · ${minutes} min read`;
       contentDiv.prepend(meta);
 
-      // Fade-in effect
+      // Fade-in animation
       setTimeout(() => contentDiv.classList.add("visible"), 50);
     })
     .catch((err) => {
