@@ -35,12 +35,12 @@ What happened:
 * The injected <form> appeared in the email body. When a user entered credentials and clicked Submit, the browser made a request to http://<attacker-domain>/collect with user and pass in the query string (because method="GET"), which was logged on the attacker-controlled server.
 
 this when the victim entered his credentials 
-<img src="blogs/images/image-2025-10-10T12_51_16.834Z (1).png" alt="Screenshot" style="width:100%;max-width:1000px;height:auto;display:block;margin:auto;border-radius:10px;">
+<img src="images/image-2025-10-10T12_51_16.834Z (1).png" alt="Screenshot" style="width:100%;max-width:1000px;height:auto;display:block;margin:auto;border-radius:10px;">
 
 successfully this credentials are preserved in attacker-domain logs
-<img src="blogs/images/2025-10-06_09-04_2.png" alt="Screenshot" style="width:100%;max-width:1000px;height:auto;display:block;margin:auto;border-radius:10px;">
+<img src="images/2025-10-06_09-04_2.png" alt="Screenshot" style="width:100%;max-width:1000px;height:auto;display:block;margin:auto;border-radius:10px;">
 
 ## Outcome 
 I reported the finding to the program with the reproduction steps and PoC. The triage team agreed that the impact justified a P3 (medium) classification however, the issue was later marked as a duplicate of an existing report. but the escalation reasoning was accepted. i though i will get my first bounty!😒
-<img src="blogs/images/2025-10-22_15-29.png" alt="Screenshot" style="width:100%;max-width:1000px;height:auto;display:block;margin:auto;border-radius:10px;">
+<img src="images/2025-10-22_15-29.png" alt="Screenshot" style="width:100%;max-width:1000px;height:auto;display:block;margin:auto;border-radius:10px;">
 
