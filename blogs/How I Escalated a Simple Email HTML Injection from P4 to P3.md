@@ -1,3 +1,4 @@
+# How I Escalated a Simple Email HTML Injection from P4 to P3
 Hey everyone — I’m Pavan (aka eh_pavan).
 This is my first blog post. In it I explain how I escalated a simple Email HTML Injection from P4 (low) to P3 (medium) while hunting on a Bugcrowd program. I’ve included the discovery steps, the payloads I used, the proof-of-concept. Sorry for any small mistakes I’m new to blogging, but I hope you learn something from my process.
 
