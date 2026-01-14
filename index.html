@@ -102,6 +102,7 @@
   </style>
 </head>
 <body>
+
   <nav class="navbar">
     <div class="logo">Pavan<span class="accent">.io</span></div>
     <ul class="nav-links">
@@ -114,10 +115,10 @@
   <section class="hero">
     <h1>Hi, I'm <span class="accent">Pavan</span></h1>
 
-    <!-- ONLY this line gets the hacker animation -->
+    <!-- Hacker matrix animated text (ONLY change here) -->
     <p id="hacker-text"
        data-text="16-year-old cybersecurity enthusiast who loves breaking systems and securing them.">
-       16-year-old cybersecurity enthusiast who loves breaking systems and securing them.
+      16-year-old cybersecurity enthusiast who loves breaking systems and securing them.
     </p>
 
     <div class="buttons">
@@ -129,23 +130,23 @@
   <section id="about" class="about">
     <h2>About Me</h2>
     <p>
-      Hi, I'm <strong>Pavan</strong> — a <strong>16-year-old cybersecurity enthusiast</strong> from India. 
-      My journey into the world of hacking began when I was 10, exploring social media and watching ethical hacking videos. 
+      Hi, I'm <strong>Pavan</strong> — a <strong>16-year-old cybersecurity enthusiast</strong> from India.
+      My journey into the world of hacking began when I was 10, exploring social media and watching ethical hacking videos.
       Curiosity led me to install <strong>Kali NetHunter</strong> on a device, gaining a basic understanding of hacking tools and techniques.<br><br>
 
-      Recognizing my passion, my parents got me a laptop at the age of 13, which allowed me to dive deeper into cybersecurity. 
-      I spent countless hours learning programming, Linux, and networking fundamentals. Over the years, I have honed skills in 
+      Recognizing my passion, my parents got me a laptop at the age of 13, which allowed me to dive deeper into cybersecurity.
+      I spent countless hours learning programming, Linux, and networking fundamentals. Over the years, I have honed skills in
       <strong>Python, Bash, SQL, Red Teaming, API Security, Web Security, Linux, Mobile Security, and Active Directory</strong>.<br><br>
 
-      I actively participate in <strong>bug bounty</strong> programs, discovering and responsibly reporting vulnerabilities. 
+      I actively participate in <strong>bug bounty</strong> programs, discovering and responsibly reporting vulnerabilities.
       I have built tools and automation workflows for reconnaissance, vulnerability scanning, and security testing to improve efficiency.<br><br>
 
-      I have a true passion to lead teams, build products, and contribute to the internet by providing top-tier security measures. 
-      This includes continuous attack surface management, constant crawling, and reporting findings across cloud, web, and API domains. 
+      I have a true passion to lead teams, build products, and contribute to the internet by providing top-tier security measures.
+      This includes continuous attack surface management, constant crawling, and reporting findings across cloud, web, and API domains.
       I am currently building <strong>ZeroClyne</strong>, which offers these features, and soon I will launch it to help secure systems worldwide.<br><br>
 
-      Looking ahead, my goal is to become a next-generation security researcher and engineer, integrating <strong>AI</strong>, 
-      <strong>cloud security</strong>, and advanced automation into my work to secure real-world systems. 
+      Looking ahead, my goal is to become a next-generation security researcher and engineer, integrating <strong>AI</strong>,
+      <strong>cloud security</strong>, and advanced automation into my work to secure real-world systems.
       Beyond technical skills, I love breaking systems ethically to understand them deeply and help make the internet safer.<br><br>
 
       My journey is driven by curiosity, continuous learning, and a vision to contribute significantly to cybersecurity worldwide.
@@ -154,19 +155,19 @@
     <h3>Profiles</h3>
     <div class="profiles">
       <a href="https://github.com/ehpavan" target="_blank">
-        <img src="https://cdn.simpleicons.org/github/ffffff"> GitHub
+        <img src="https://cdn.simpleicons.org/github/ffffff" alt="GitHub"> GitHub
       </a>
       <a href="https://x.com/eh_pavan" target="_blank">
-        <img src="https://cdn.simpleicons.org/x/ffffff"> Twitter
+        <img src="https://cdn.simpleicons.org/x/ffffff" alt="Twitter"> Twitter
       </a>
       <a href="https://app.intigriti.com/profile/ehpavan" target="_blank">
-        <img src="https://cdn.simpleicons.org/intigriti/ffffff"> Intigriti
+        <img src="https://cdn.simpleicons.org/intigriti/ffffff" alt="Intigriti"> Intigriti
       </a>
       <a href="https://hackerone.com/eh_pavan" target="_blank">
-        <img src="https://cdn.simpleicons.org/hackerone/ffffff"> HackerOne
+        <img src="https://cdn.simpleicons.org/hackerone/ffffff" alt="HackerOne"> HackerOne
       </a>
       <a href="https://bugcrowd.com/eh_pavan" target="_blank">
-        <img src="https://cdn.simpleicons.org/bugcrowd/ffffff"> Bugcrowd
+        <img src="https://cdn.simpleicons.org/bugcrowd/ffffff" alt="Bugcrowd"> Bugcrowd
       </a>
     </div>
   </section>
@@ -175,42 +176,49 @@
     <p>© 2025 Pavan</p>
   </footer>
 
-  <!-- === Hacker Decode Animation (JS ONLY) === -->
+  <!-- ===== MATRIX / HACKER TEXT DECODE (JS ONLY) ===== -->
   <script>
     const el = document.getElementById("hacker-text");
     const originalText = el.dataset.text;
-    const chars = "ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789!@#$%^&*()_+-={}[]|:;<>?,./";
+    const chars = "ABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789@#$%^&*";
 
-    let interval = null;
+    let frame = 0;
+    let running = false;
 
-    el.addEventListener("mouseenter", () => {
-      let iteration = 0;
+    function decode() {
+      if (!running) return;
 
-      clearInterval(interval);
-      interval = setInterval(() => {
-        el.textContent = originalText
-          .split("")
-          .map((char, index) => {
-            if (index < iteration) {
-              return originalText[index];
-            }
-            return chars[Math.floor(Math.random() * chars.length)];
-          })
-          .join("");
+      el.textContent = originalText
+        .split("")
+        .map((char, i) => {
+          if (i < frame) return originalText[i];
+          return chars[Math.floor(Math.random() * chars.length)];
+        })
+        .join("");
 
-        iteration += 1 / 3;
+      frame += 0.4;
 
-        if (iteration >= originalText.length) {
-          clearInterval(interval);
-          el.textContent = originalText;
-        }
-      }, 30);
+      if (frame <= originalText.length) {
+        requestAnimationFrame(decode);
+      } else {
+        running = false;
+        el.textContent = originalText;
+      }
+    }
+
+    el.addEventListener("mousemove", () => {
+      if (running) return;
+      running = true;
+      frame = 0;
+      decode();
     });
 
     el.addEventListener("mouseleave", () => {
-      clearInterval(interval);
+      running = false;
+      frame = 0;
       el.textContent = originalText;
     });
   </script>
+
 </body>
 </html>
