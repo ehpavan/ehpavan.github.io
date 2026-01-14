@@ -38,7 +38,6 @@
       }
     }
 
-    /* Subtle typing-style underline for headings */
     .about h2::after {
       content: "_";
       animation: blink 1s infinite;
@@ -52,7 +51,6 @@
       }
     }
 
-    /* === Profiles Section Styling === */
     .about h3 {
       margin-top: 35px;
       font-size: 1.5rem;
@@ -115,7 +113,13 @@
 
   <section class="hero">
     <h1>Hi, I'm <span class="accent">Pavan</span></h1>
-    <p>16-year-old cybersecurity enthusiast who loves breaking systems and securing them.</p>
+
+    <!-- ONLY this line gets the hacker animation -->
+    <p id="hacker-text"
+       data-text="16-year-old cybersecurity enthusiast who loves breaking systems and securing them.">
+       16-year-old cybersecurity enthusiast who loves breaking systems and securing them.
+    </p>
+
     <div class="buttons">
       <a href="/blogs/" class="btn">View Blogs</a>
       <a href="/projects/" class="btn secondary">View Projects</a>
@@ -149,20 +153,20 @@
 
     <h3>Profiles</h3>
     <div class="profiles">
-      <a href="https://github.com/ehpavan" target="_blank" rel="noopener noreferrer">
-        <img src="https://cdn.simpleicons.org/github/ffffff" alt="GitHub"> GitHub
+      <a href="https://github.com/ehpavan" target="_blank">
+        <img src="https://cdn.simpleicons.org/github/ffffff"> GitHub
       </a>
-      <a href="https://x.com/eh_pavan" target="_blank" rel="noopener noreferrer">
-        <img src="https://cdn.simpleicons.org/x/ffffff" alt="Twitter (X)"> Twitter
+      <a href="https://x.com/eh_pavan" target="_blank">
+        <img src="https://cdn.simpleicons.org/x/ffffff"> Twitter
       </a>
-      <a href="https://app.intigriti.com/profile/ehpavan" target="_blank" rel="noopener noreferrer">
-        <img src="https://cdn.simpleicons.org/intigriti/ffffff" alt="Intigriti"> Intigriti
+      <a href="https://app.intigriti.com/profile/ehpavan" target="_blank">
+        <img src="https://cdn.simpleicons.org/intigriti/ffffff"> Intigriti
       </a>
-      <a href="https://hackerone.com/eh_pavan" target="_blank" rel="noopener noreferrer">
-        <img src="https://cdn.simpleicons.org/hackerone/ffffff" alt="HackerOne"> HackerOne
+      <a href="https://hackerone.com/eh_pavan" target="_blank">
+        <img src="https://cdn.simpleicons.org/hackerone/ffffff"> HackerOne
       </a>
-      <a href="https://bugcrowd.com/eh_pavan" target="_blank" rel="noopener noreferrer">
-        <img src="https://cdn.simpleicons.org/bugcrowd/ffffff" alt="Bugcrowd"> Bugcrowd
+      <a href="https://bugcrowd.com/eh_pavan" target="_blank">
+        <img src="https://cdn.simpleicons.org/bugcrowd/ffffff"> Bugcrowd
       </a>
     </div>
   </section>
@@ -170,5 +174,43 @@
   <footer>
     <p>© 2025 Pavan</p>
   </footer>
+
+  <!-- === Hacker Decode Animation (JS ONLY) === -->
+  <script>
+    const el = document.getElementById("hacker-text");
+    const originalText = el.dataset.text;
+    const chars = "ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789!@#$%^&*()_+-={}[]|:;<>?,./";
+
+    let interval = null;
+
+    el.addEventListener("mouseenter", () => {
+      let iteration = 0;
+
+      clearInterval(interval);
+      interval = setInterval(() => {
+        el.textContent = originalText
+          .split("")
+          .map((char, index) => {
+            if (index < iteration) {
+              return originalText[index];
+            }
+            return chars[Math.floor(Math.random() * chars.length)];
+          })
+          .join("");
+
+        iteration += 1 / 3;
+
+        if (iteration >= originalText.length) {
+          clearInterval(interval);
+          el.textContent = originalText;
+        }
+      }, 30);
+    });
+
+    el.addEventListener("mouseleave", () => {
+      clearInterval(interval);
+      el.textContent = originalText;
+    });
+  </script>
 </body>
 </html>
