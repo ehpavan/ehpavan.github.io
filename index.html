@@ -8,18 +8,7 @@
   <link rel="stylesheet" href="style.css">
 
   <style>
-    /* =========================
-       HERO & ABOUT ENHANCEMENTS
-       ========================= */
-
-    .hero p {
-      max-width: 720px;
-      margin: 16px auto 0;
-      font-size: 1.05rem;
-      line-height: 1.6;
-    }
-
-    /* --- About Section --- */
+    /* === ABOUT ME SECTION (UNCHANGED CONTENT) === */
     .about {
       position: relative;
       margin-top: 50px;
@@ -35,18 +24,19 @@
       letter-spacing: 1px;
     }
 
+    .about p {
+      line-height: 1.7;
+    }
+
     .about h2::after {
       content: " ▮";
       animation: blink 1s steps(1) infinite;
+      margin-left: 4px;
       opacity: 0.6;
     }
 
     @keyframes blink {
       50% { opacity: 0; }
-    }
-
-    .about p {
-      line-height: 1.7;
     }
 
     .about h3 {
@@ -56,7 +46,7 @@
       text-transform: uppercase;
     }
 
-    /* --- Profiles --- */
+    /* === Profiles === */
     .profiles {
       display: flex;
       flex-wrap: wrap;
@@ -88,10 +78,7 @@
       box-shadow: 0 0 10px rgba(255, 255, 255, 0.05);
     }
 
-    /* =========================
-       SCROLL REVEAL (LIGHT)
-       ========================= */
-
+    /* === VERY LIGHT SCROLL REVEAL === */
     .reveal {
       opacity: 0;
       transform: translateY(24px);
@@ -119,9 +106,9 @@
   <section class="hero reveal">
     <h1>Hi, I'm <span class="accent">Pavan</span></h1>
 
-    <!-- PROFESSIONAL TYPING TEXT -->
+    <!-- FAST, PROFESSIONAL TYPING (NO GIMMICKS) -->
     <p id="typed-text"
-       data-text="A cybersecurity researcher who began breaking and securing systems at the age of 16 — driven by curiosity, discipline, and real-world impact.">
+       data-text="16-year-old cybersecurity enthusiast focused on breaking systems responsibly and securing them at scale.">
     </p>
 
     <div class="buttons">
@@ -130,25 +117,30 @@
     </div>
   </section>
 
-  <!-- ABOUT -->
+  <!-- ABOUT ME (FULL ORIGINAL TEXT — NOTHING REMOVED) -->
   <section id="about" class="about reveal">
     <h2>About Me</h2>
     <p>
-      Hi, I'm <strong>Pavan</strong> — a <strong>16-year-old cybersecurity enthusiast</strong> from India.
-      My journey into the world of hacking began at the age of 10, driven by curiosity and a desire to understand how systems behave under real-world conditions.<br><br>
+      Hi, I'm <strong>Pavan</strong> — a <strong>16-year-old cybersecurity enthusiast</strong> from India. 
+      My journey into the world of hacking began when I was 10, exploring social media and watching ethical hacking videos. 
+      Curiosity led me to install <strong>Kali NetHunter</strong> on a device, gaining a basic understanding of hacking tools and techniques.<br><br>
 
-      By 13, I was deeply exploring programming, Linux, networking, and offensive security.
-      Over time, I developed hands-on skills in
+      Recognizing my passion, my parents got me a laptop at the age of 13, which allowed me to dive deeper into cybersecurity. 
+      I spent countless hours learning programming, Linux, and networking fundamentals. Over the years, I have honed skills in 
       <strong>Python, Bash, SQL, Red Teaming, API Security, Web Security, Linux, Mobile Security, and Active Directory</strong>.<br><br>
 
-      I actively participate in <strong>bug bounty</strong> programs, where I discover and responsibly report vulnerabilities,
-      and I build automation to improve reconnaissance and vulnerability discovery efficiency.<br><br>
+      I actively participate in <strong>bug bounty</strong> programs, discovering and responsibly reporting vulnerabilities. 
+      I have built tools and automation workflows for reconnaissance, vulnerability scanning, and security testing to improve efficiency.<br><br>
 
-      I am currently building <strong>ZeroClyne</strong>, a platform focused on continuous security,
-      attack surface visibility, and protecting modern web, cloud, and API-driven systems.<br><br>
+      I have a true passion to lead teams, build products, and contribute to the internet by providing top-tier security measures. 
+      This includes continuous attack surface management, constant crawling, and reporting findings across cloud, web, and API domains. 
+      I am currently building <strong>ZeroClyne</strong>, which offers these features, and soon I will launch it to help secure systems worldwide.<br><br>
 
-      My long-term goal is to become a next-generation security engineer —
-      combining <strong>deep technical research, automation, and AI</strong> to help make the internet safer.
+      Looking ahead, my goal is to become a next-generation security researcher and engineer, integrating <strong>AI</strong>, 
+      <strong>cloud security</strong>, and advanced automation into my work to secure real-world systems. 
+      Beyond technical skills, I love breaking systems ethically to understand them deeply and help make the internet safer.<br><br>
+
+      My journey is driven by curiosity, continuous learning, and a vision to contribute significantly to cybersecurity worldwide.
     </p>
 
     <h3>Profiles</h3>
@@ -175,9 +167,7 @@
     <p>© 2026 Pavan</p>
   </footer>
 
-  <!-- =========================
-       FAST TYPING (PERFORMANCE SAFE)
-       ========================= -->
+  <!-- FAST TYPING (PERFORMANCE SAFE) -->
   <script>
     const typed = document.getElementById("typed-text");
     const text = typed.dataset.text;
@@ -186,16 +176,14 @@
     function type() {
       typed.textContent = text.slice(0, i++);
       if (i <= text.length) {
-        requestAnimationFrame(() => setTimeout(type, 14));
+        setTimeout(type, 14);
       }
     }
 
     window.addEventListener("load", type);
   </script>
 
-  <!-- =========================
-       SCROLL REVEAL ENGINE
-       ========================= -->
+  <!-- SOFT SCROLL REVEAL -->
   <script>
     const observer = new IntersectionObserver(entries => {
       entries.forEach(entry => {
