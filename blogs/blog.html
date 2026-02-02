@@ -42,6 +42,7 @@ pre, pre code {
 </style>
 </head>
 <body>
+
 <nav>
   <a href="index.html">← Back to Blogs</a>
 </nav>
@@ -51,7 +52,7 @@ pre, pre code {
 </div>
 
 <script>
-// Estimate reading time function
+// Estimate reading time
 function estimateReadingTime(text) {
   const wordsPerMinute = 200;
   return Math.ceil(text.trim().split(/\s+/).length / wordsPerMinute);
@@ -61,44 +62,64 @@ const params = new URLSearchParams(window.location.search);
 const file = params.get('file');
 const contentDiv = document.getElementById('blog-content');
 
-if(file){
-  fetch(`./${file}`)
-    .then(res => {
-      if(!res.ok) throw new Error("Failed to load file");
-      return res.text();
-    })
-    .then(md => {
-      // Render Markdown
-      contentDiv.innerHTML = marked.parse(md);
+async function loadBlog() {
+  if (!file) {
+    contentDiv.innerHTML = "<p>No blog file specified.</p>";
+    return;
+  }
 
-      // Plain code blocks
-      document.querySelectorAll("pre code").forEach(block => {
-        block.style.background = "transparent";
-        block.style.color = "inherit";
-      });
+  try {
+    // Fetch markdown
+    const res = await fetch(`./${file}`);
+    if (!res.ok) throw new Error("Failed to load file");
+    const md = await res.text();
 
-      // --- DYNAMIC DATE & READ TIME ---
-      const meta = document.createElement('p');
-      meta.className = 'blog-meta';
+    // Render markdown
+    contentDiv.innerHTML = marked.parse(md);
 
-      // Use today's date as published date
-      const today = new Date();
-      const formattedDate = today.toLocaleDateString("en-US", {year:"numeric", month:"short", day:"numeric"});
-      const minutes = estimateReadingTime(md);
-
-      meta.textContent = `${formattedDate} · ${minutes} min read`;
-      contentDiv.prepend(meta);
-
-      // Fade-in animation
-      setTimeout(()=> contentDiv.classList.add('visible'), 50);
-    })
-    .catch(err=>{
-      contentDiv.innerHTML="<p>Failed to load blog. Check file path.</p>";
-      console.error(err);
+    // Fix code blocks
+    document.querySelectorAll("pre code").forEach(block => {
+      block.style.background = "transparent";
+      block.style.color = "inherit";
     });
-}else{
-  contentDiv.innerHTML="<p>No blog file specified.</p>";
+
+    // Fetch blog metadata
+    let formattedDate = "Unknown date";
+    try {
+      const metaRes = await fetch("blogs.json");
+      const blogs = await metaRes.json();
+      const blog = blogs.find(b => b.file === file);
+
+      if (blog && blog.date) {
+        const dateObj = new Date(blog.date);
+        formattedDate = dateObj.toLocaleDateString("en-US", {
+          year: "numeric",
+          month: "short",
+          day: "numeric"
+        });
+      }
+    } catch (e) {
+      console.warn("Failed to load blogs.json", e);
+    }
+
+    const minutes = estimateReadingTime(md);
+
+    const meta = document.createElement("p");
+    meta.className = "blog-meta";
+    meta.textContent = `${formattedDate} · ${minutes} min read`;
+    contentDiv.prepend(meta);
+
+    // Fade-in animation
+    setTimeout(() => contentDiv.classList.add("visible"), 50);
+
+  } catch (err) {
+    contentDiv.innerHTML = "<p>Failed to load blog. Check file path.</p>";
+    console.error(err);
+  }
 }
+
+loadBlog();
 </script>
+
 </body>
 </html>
