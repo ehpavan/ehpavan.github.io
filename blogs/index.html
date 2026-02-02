@@ -6,6 +6,7 @@
 <title>Blogs | Pavan</title>
 <link rel="stylesheet" href="../style.css">
 <script src="https://cdn.jsdelivr.net/npm/marked/marked.min.js"></script>
+
 <style>
   /* Blog List Layout */
   #blog-list {
@@ -20,14 +21,9 @@
     border-radius: 12px;
     backdrop-filter: blur(6px);
     background: rgba(255,255,255,0.02);
-    transition: transform 0.3s ease, box-shadow 0.3s ease, opacity 0.5s ease, transform 0.5s ease;
-    opacity: 0;
-    transform: translateY(20px);
-  }
-
-  .blog-card.show {
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
     opacity: 1;
-    transform: translateY(0);
+    transform: none;
   }
 
   .blog-card:hover {
@@ -64,8 +60,24 @@
     font-size: 1rem;
     margin-top: 10px;
   }
+
+  /* ===== DESKTOP SPACING FIX ONLY ===== */
+  @media (min-width: 1024px) {
+    .hero {
+      margin-bottom: 16px;
+    }
+
+    #blog-list {
+      margin-top: 12px;
+    }
+
+    .blog-card {
+      padding: 18px 20px;
+    }
+  }
 </style>
 </head>
+
 <body>
   <nav class="navbar">
     <div class="logo">Pavan<span class="accent">.io</span></div>
@@ -84,64 +96,56 @@
   <section id="blog-list"></section>
 
   <script>
-  const blogList = document.getElementById("blog-list");
+    const blogList = document.getElementById("blog-list");
 
-  function estimateReadingTime(text) {
-    const wordsPerMinute = 200;
-    return Math.ceil(text.trim().split(/\s+/).length / wordsPerMinute);
-  }
-
-  async function loadBlogs() {
-    try {
-      const res = await fetch('blogs.json');
-      const blogs = await res.json();
-
-      // Sort blogs by date (newest first)
-      blogs.sort((a, b) => new Date(b.date) - new Date(a.date));
-
-      // Fetch all blog contents sequentially
-      const blogData = [];
-      for (const b of blogs) {
-        try {
-          const res = await fetch(`./${b.file}`);
-          const content = await res.text();
-          blogData.push({ ...b, content });
-        } catch (err) {
-          console.warn(`Failed to load ${b.file}`, err);
-        }
-      }
-
-      // Append in sorted order with fade-in
-      blogData.forEach((b, i) => {
-        const minutes = estimateReadingTime(b.content);
-        const dateObj = new Date(b.date);
-        const formattedDate = dateObj.toLocaleDateString("en-US", {
-          year: "numeric",
-          month: "short",
-          day: "numeric"
-        });
-
-        const card = document.createElement("div");
-        card.className = "blog-card";
-        card.innerHTML = `
-          <a href="blog.html?file=${b.file}">
-            <h2>${b.title}</h2>
-          </a>
-          <p class="meta">${formattedDate} · ${minutes} min read</p>
-        `;
-
-        blogList.appendChild(card);
-
-        // Fade-in with delay
-        setTimeout(() => card.classList.add("show"), i * 150);
-      });
-
-    } catch (err) {
-      console.error("Failed to load blogs.json", err);
+    function estimateReadingTime(text) {
+      const wordsPerMinute = 200;
+      return Math.ceil(text.trim().split(/\s+/).length / wordsPerMinute);
     }
-  }
 
-  document.addEventListener("DOMContentLoaded", loadBlogs);
+    async function loadBlogs() {
+      try {
+        const res = await fetch("blogs.json");
+        const blogs = await res.json();
+
+        // Sort newest first
+        blogs.sort((a, b) => new Date(b.date) - new Date(a.date));
+
+        for (const b of blogs) {
+          try {
+            const res = await fetch(`./${b.file}`);
+            const content = await res.text();
+
+            const minutes = estimateReadingTime(content);
+            const dateObj = new Date(b.date);
+            const formattedDate = dateObj.toLocaleDateString("en-US", {
+              year: "numeric",
+              month: "short",
+              day: "numeric"
+            });
+
+            const card = document.createElement("div");
+            card.className = "blog-card";
+            card.innerHTML = `
+              <a href="blog.html?file=${b.file}">
+                <h2>${b.title}</h2>
+              </a>
+              <p class="meta">${formattedDate} · ${minutes} min read</p>
+            `;
+
+            blogList.appendChild(card);
+
+          } catch (err) {
+            console.warn("Failed to load blog:", b.file);
+          }
+        }
+
+      } catch (err) {
+        console.error("Failed to load blogs.json", err);
+      }
+    }
+
+    document.addEventListener("DOMContentLoaded", loadBlogs);
   </script>
 </body>
 </html>
