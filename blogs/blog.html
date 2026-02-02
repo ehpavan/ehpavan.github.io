@@ -20,15 +20,10 @@ pre, pre code {
   word-wrap: break-word;
 }
 
-/* Fade-in animation for blog content */
+/* Blog content (NO delayed animation) */
 .blog-content {
-  transition: opacity 0.5s ease, transform 0.5s ease;
-  opacity: 0;
-  transform: translateY(20px);
-}
-.blog-content.visible {
   opacity: 1;
-  transform: translateY(0);
+  transform: none;
 }
 
 /* Meta info */
@@ -52,7 +47,6 @@ pre, pre code {
 </div>
 
 <script>
-// Estimate reading time
 function estimateReadingTime(text) {
   const wordsPerMinute = 200;
   return Math.ceil(text.trim().split(/\s+/).length / wordsPerMinute);
@@ -69,38 +63,30 @@ async function loadBlog() {
   }
 
   try {
-    // Fetch markdown
     const res = await fetch(`./${file}`);
     if (!res.ok) throw new Error("Failed to load file");
     const md = await res.text();
 
-    // Render markdown
     contentDiv.innerHTML = marked.parse(md);
 
-    // Fix code blocks
     document.querySelectorAll("pre code").forEach(block => {
       block.style.background = "transparent";
       block.style.color = "inherit";
     });
 
-    // Fetch blog metadata
+    // Load correct published date
     let formattedDate = "Unknown date";
     try {
       const metaRes = await fetch("blogs.json");
       const blogs = await metaRes.json();
       const blog = blogs.find(b => b.file === file);
-
-      if (blog && blog.date) {
-        const dateObj = new Date(blog.date);
-        formattedDate = dateObj.toLocaleDateString("en-US", {
-          year: "numeric",
-          month: "short",
-          day: "numeric"
-        });
+      if (blog?.date) {
+        formattedDate = new Date(blog.date).toLocaleDateString(
+          "en-US",
+          { year: "numeric", month: "short", day: "numeric" }
+        );
       }
-    } catch (e) {
-      console.warn("Failed to load blogs.json", e);
-    }
+    } catch {}
 
     const minutes = estimateReadingTime(md);
 
@@ -109,11 +95,8 @@ async function loadBlog() {
     meta.textContent = `${formattedDate} · ${minutes} min read`;
     contentDiv.prepend(meta);
 
-    // Fade-in animation
-    setTimeout(() => contentDiv.classList.add("visible"), 50);
-
   } catch (err) {
-    contentDiv.innerHTML = "<p>Failed to load blog. Check file path.</p>";
+    contentDiv.innerHTML = "<p>Failed to load blog.</p>";
     console.error(err);
   }
 }
