@@ -6,15 +6,15 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Pavan | Cybersecurity Enthusiast</title>
   <link rel="stylesheet" href="style.css">
+
   <style>
-    /* === Smooth futuristic enhancements for About Me === */
+    /* === ABOUT SECTION (UNCHANGED CORE STYLE) === */
     .about {
       position: relative;
       margin-top: 50px;
       padding: 30px;
       border-radius: 12px;
       backdrop-filter: blur(8px);
-      transition: all 0.4s ease;
     }
 
     .about h2 {
@@ -24,31 +24,14 @@
       letter-spacing: 1px;
     }
 
-    .about p {
-      line-height: 1.7;
-      opacity: 0;
-      transform: translateY(20px);
-      animation: fadeUp 1s ease forwards 0.3s;
-    }
-
-    @keyframes fadeUp {
-      to {
-        opacity: 1;
-        transform: translateY(0);
-      }
-    }
-
     .about h2::after {
-      content: "_";
-      animation: blink 1s infinite;
-      margin-left: 4px;
+      content: " ▮";
+      animation: blink 1s steps(1) infinite;
       opacity: 0.6;
     }
 
     @keyframes blink {
-      50% {
-        opacity: 0;
-      }
+      50% { opacity: 0; }
     }
 
     .about h3 {
@@ -58,14 +41,12 @@
       text-transform: uppercase;
     }
 
+    /* === PROFILES === */
     .profiles {
       display: flex;
       flex-wrap: wrap;
       gap: 16px;
       margin-top: 20px;
-      opacity: 0;
-      transform: translateY(20px);
-      animation: fadeUp 1s ease forwards 0.6s;
     }
 
     .profiles a {
@@ -85,24 +66,34 @@
     .profiles img {
       width: 22px;
       height: 22px;
-      filter: brightness(0.9);
       transition: transform 0.3s ease, filter 0.3s ease;
+    }
+
+    .profiles a:hover {
+      transform: translateY(-3px);
+      box-shadow: 0 0 10px rgba(255, 255, 255, 0.05);
     }
 
     .profiles a:hover img {
       transform: scale(1.1);
-      filter: brightness(1.3);
     }
 
-    .profiles a:hover {
-      border-color: rgba(255, 255, 255, 0.3);
-      transform: translateY(-3px);
-      box-shadow: 0 0 10px rgba(255, 255, 255, 0.05);
+    /* === SCROLL REVEAL (VERY SOFT) === */
+    .reveal {
+      opacity: 0;
+      transform: translateY(24px);
+      transition: opacity 0.8s ease, transform 0.8s ease;
+    }
+
+    .reveal.visible {
+      opacity: 1;
+      transform: translateY(0);
     }
   </style>
 </head>
+
 <body>
-  <nav class="navbar">
+  <nav class="navbar reveal">
     <div class="logo">Pavan<span class="accent">.io</span></div>
     <ul class="nav-links">
       <li><a href="#about">About Me</a></li>
@@ -111,13 +102,12 @@
     </ul>
   </nav>
 
-  <section class="hero">
+  <section class="hero reveal">
     <h1>Hi, I'm <span class="accent">Pavan</span></h1>
 
-    <!-- ONLY this line gets the hacker animation -->
-    <p id="hacker-text"
-       data-text="16-year-old cybersecurity enthusiast who loves breaking systems and securing them.">
-       16-year-old cybersecurity enthusiast who loves breaking systems and securing them.
+    <!-- FAST, CLEAN TYPING TEXT -->
+    <p id="typed-text"
+       data-text="16-year-old cybersecurity enthusiast focused on breaking systems responsibly and securing them at scale.">
     </p>
 
     <div class="buttons">
@@ -126,29 +116,21 @@
     </div>
   </section>
 
-  <section id="about" class="about">
+  <section id="about" class="about reveal">
     <h2>About Me</h2>
     <p>
-      Hi, I'm <strong>Pavan</strong> — a <strong>16-year-old cybersecurity enthusiast</strong> from India. 
-      My journey into the world of hacking began when I was 10, exploring social media and watching ethical hacking videos. 
-      Curiosity led me to install <strong>Kali NetHunter</strong> on a device, gaining a basic understanding of hacking tools and techniques.<br><br>
+      Hi, I'm <strong>Pavan</strong> — a <strong>16-year-old cybersecurity enthusiast</strong> from India.
+      My journey into hacking began early, driven by curiosity and a desire to understand how systems work under the hood.<br><br>
 
-      Recognizing my passion, my parents got me a laptop at the age of 13, which allowed me to dive deeper into cybersecurity. 
-      I spent countless hours learning programming, Linux, and networking fundamentals. Over the years, I have honed skills in 
-      <strong>Python, Bash, SQL, Red Teaming, API Security, Web Security, Linux, Mobile Security, and Active Directory</strong>.<br><br>
+      Over the years, I’ve developed skills across
+      <strong>Python, Bash, SQL, Red Teaming, API Security, Web Security, Linux, Mobile Security, and Active Directory</strong>,
+      while actively participating in bug bounty programs and building automation for reconnaissance and testing.<br><br>
 
-      I actively participate in <strong>bug bounty</strong> programs, discovering and responsibly reporting vulnerabilities. 
-      I have built tools and automation workflows for reconnaissance, vulnerability scanning, and security testing to improve efficiency.<br><br>
+      I’m currently building <strong>ZeroClyne</strong>, a platform focused on continuous security, attack surface visibility,
+      and real-world protection across web, cloud, and API environments.<br><br>
 
-      I have a true passion to lead teams, build products, and contribute to the internet by providing top-tier security measures. 
-      This includes continuous attack surface management, constant crawling, and reporting findings across cloud, web, and API domains. 
-      I am currently building <strong>ZeroClyne</strong>, which offers these features, and soon I will launch it to help secure systems worldwide.<br><br>
-
-      Looking ahead, my goal is to become a next-generation security researcher and engineer, integrating <strong>AI</strong>, 
-      <strong>cloud security</strong>, and advanced automation into my work to secure real-world systems. 
-      Beyond technical skills, I love breaking systems ethically to understand them deeply and help make the internet safer.<br><br>
-
-      My journey is driven by curiosity, continuous learning, and a vision to contribute significantly to cybersecurity worldwide.
+      My long-term goal is to become a next-generation security engineer, blending
+      <strong>AI, automation, and deep technical research</strong> to make the internet safer.
     </p>
 
     <h3>Profiles</h3>
@@ -171,46 +153,41 @@
     </div>
   </section>
 
-  <footer>
+  <footer class="reveal">
     <p>© 2026 Pavan</p>
   </footer>
 
-  <!-- === Hacker Decode Animation (JS ONLY) === -->
+  <!-- === FAST PROFESSIONAL TYPING === -->
   <script>
-    const el = document.getElementById("hacker-text");
-    const originalText = el.dataset.text;
-    const chars = "ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789!@#$%^&*()_+-={}[]|:;<>?,./";
+    const el = document.getElementById("typed-text");
+    const text = el.dataset.text;
+    let i = 0;
 
-    let interval = null;
+    function type() {
+      el.textContent = text.slice(0, i++);
+      if (i <= text.length) {
+        setTimeout(type, 14); // fast, smooth
+      }
+    }
 
-    el.addEventListener("mouseenter", () => {
-      let iteration = 0;
+    window.addEventListener("load", type);
+  </script>
 
-      clearInterval(interval);
-      interval = setInterval(() => {
-        el.textContent = originalText
-          .split("")
-          .map((char, index) => {
-            if (index < iteration) {
-              return originalText[index];
-            }
-            return chars[Math.floor(Math.random() * chars.length)];
-          })
-          .join("");
+  <!-- === SCROLL REVEAL ENGINE === -->
+  <script>
+    const observer = new IntersectionObserver(
+      entries => {
+        entries.forEach(entry => {
+          if (entry.isIntersecting) {
+            entry.target.classList.add("visible");
+            observer.unobserve(entry.target);
+          }
+        });
+      },
+      { threshold: 0.12 }
+    );
 
-        iteration += 1 / 3;
-
-        if (iteration >= originalText.length) {
-          clearInterval(interval);
-          el.textContent = originalText;
-        }
-      }, 30);
-    });
-
-    el.addEventListener("mouseleave", () => {
-      clearInterval(interval);
-      el.textContent = originalText;
-    });
+    document.querySelectorAll(".reveal").forEach(el => observer.observe(el));
   </script>
 </body>
 </html>
