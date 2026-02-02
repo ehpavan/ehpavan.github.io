@@ -8,7 +8,18 @@
   <link rel="stylesheet" href="style.css">
 
   <style>
-    /* === ABOUT SECTION (UNCHANGED CORE STYLE) === */
+    /* =========================
+       HERO & ABOUT ENHANCEMENTS
+       ========================= */
+
+    .hero p {
+      max-width: 720px;
+      margin: 16px auto 0;
+      font-size: 1.05rem;
+      line-height: 1.6;
+    }
+
+    /* --- About Section --- */
     .about {
       position: relative;
       margin-top: 50px;
@@ -34,6 +45,10 @@
       50% { opacity: 0; }
     }
 
+    .about p {
+      line-height: 1.7;
+    }
+
     .about h3 {
       margin-top: 35px;
       font-size: 1.5rem;
@@ -41,7 +56,7 @@
       text-transform: uppercase;
     }
 
-    /* === PROFILES === */
+    /* --- Profiles --- */
     .profiles {
       display: flex;
       flex-wrap: wrap;
@@ -58,7 +73,7 @@
       border-radius: 10px;
       text-decoration: none;
       font-size: 1rem;
-      transition: all 0.3s ease;
+      transition: transform 0.25s ease, box-shadow 0.25s ease;
       background: rgba(255, 255, 255, 0.03);
       backdrop-filter: blur(4px);
     }
@@ -66,7 +81,6 @@
     .profiles img {
       width: 22px;
       height: 22px;
-      transition: transform 0.3s ease, filter 0.3s ease;
     }
 
     .profiles a:hover {
@@ -74,15 +88,14 @@
       box-shadow: 0 0 10px rgba(255, 255, 255, 0.05);
     }
 
-    .profiles a:hover img {
-      transform: scale(1.1);
-    }
+    /* =========================
+       SCROLL REVEAL (LIGHT)
+       ========================= */
 
-    /* === SCROLL REVEAL (VERY SOFT) === */
     .reveal {
       opacity: 0;
       transform: translateY(24px);
-      transition: opacity 0.8s ease, transform 0.8s ease;
+      transition: opacity 0.7s ease, transform 0.7s ease;
     }
 
     .reveal.visible {
@@ -102,12 +115,13 @@
     </ul>
   </nav>
 
+  <!-- HERO -->
   <section class="hero reveal">
     <h1>Hi, I'm <span class="accent">Pavan</span></h1>
 
-    <!-- FAST, CLEAN TYPING TEXT -->
+    <!-- PROFESSIONAL TYPING TEXT -->
     <p id="typed-text"
-       data-text="16-year-old cybersecurity enthusiast focused on breaking systems responsibly and securing them at scale.">
+       data-text="A cybersecurity researcher who began breaking and securing systems at the age of 16 — driven by curiosity, discipline, and real-world impact.">
     </p>
 
     <div class="buttons">
@@ -116,21 +130,25 @@
     </div>
   </section>
 
+  <!-- ABOUT -->
   <section id="about" class="about reveal">
     <h2>About Me</h2>
     <p>
       Hi, I'm <strong>Pavan</strong> — a <strong>16-year-old cybersecurity enthusiast</strong> from India.
-      My journey into hacking began early, driven by curiosity and a desire to understand how systems work under the hood.<br><br>
+      My journey into the world of hacking began at the age of 10, driven by curiosity and a desire to understand how systems behave under real-world conditions.<br><br>
 
-      Over the years, I’ve developed skills across
-      <strong>Python, Bash, SQL, Red Teaming, API Security, Web Security, Linux, Mobile Security, and Active Directory</strong>,
-      while actively participating in bug bounty programs and building automation for reconnaissance and testing.<br><br>
+      By 13, I was deeply exploring programming, Linux, networking, and offensive security.
+      Over time, I developed hands-on skills in
+      <strong>Python, Bash, SQL, Red Teaming, API Security, Web Security, Linux, Mobile Security, and Active Directory</strong>.<br><br>
 
-      I’m currently building <strong>ZeroClyne</strong>, a platform focused on continuous security, attack surface visibility,
-      and real-world protection across web, cloud, and API environments.<br><br>
+      I actively participate in <strong>bug bounty</strong> programs, where I discover and responsibly report vulnerabilities,
+      and I build automation to improve reconnaissance and vulnerability discovery efficiency.<br><br>
 
-      My long-term goal is to become a next-generation security engineer, blending
-      <strong>AI, automation, and deep technical research</strong> to make the internet safer.
+      I am currently building <strong>ZeroClyne</strong>, a platform focused on continuous security,
+      attack surface visibility, and protecting modern web, cloud, and API-driven systems.<br><br>
+
+      My long-term goal is to become a next-generation security engineer —
+      combining <strong>deep technical research, automation, and AI</strong> to help make the internet safer.
     </p>
 
     <h3>Profiles</h3>
@@ -157,35 +175,36 @@
     <p>© 2026 Pavan</p>
   </footer>
 
-  <!-- === FAST PROFESSIONAL TYPING === -->
+  <!-- =========================
+       FAST TYPING (PERFORMANCE SAFE)
+       ========================= -->
   <script>
-    const el = document.getElementById("typed-text");
-    const text = el.dataset.text;
+    const typed = document.getElementById("typed-text");
+    const text = typed.dataset.text;
     let i = 0;
 
     function type() {
-      el.textContent = text.slice(0, i++);
+      typed.textContent = text.slice(0, i++);
       if (i <= text.length) {
-        setTimeout(type, 14); // fast, smooth
+        requestAnimationFrame(() => setTimeout(type, 14));
       }
     }
 
     window.addEventListener("load", type);
   </script>
 
-  <!-- === SCROLL REVEAL ENGINE === -->
+  <!-- =========================
+       SCROLL REVEAL ENGINE
+       ========================= -->
   <script>
-    const observer = new IntersectionObserver(
-      entries => {
-        entries.forEach(entry => {
-          if (entry.isIntersecting) {
-            entry.target.classList.add("visible");
-            observer.unobserve(entry.target);
-          }
-        });
-      },
-      { threshold: 0.12 }
-    );
+    const observer = new IntersectionObserver(entries => {
+      entries.forEach(entry => {
+        if (entry.isIntersecting) {
+          entry.target.classList.add("visible");
+          observer.unobserve(entry.target);
+        }
+      });
+    }, { threshold: 0.12 });
 
     document.querySelectorAll(".reveal").forEach(el => observer.observe(el));
   </script>
