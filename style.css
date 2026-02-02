@@ -135,3 +135,54 @@ footer {
   color: #999;
   background: rgba(255, 255, 255, 0.03);
 }
+
+/* =========================
+   MOBILE RESPONSIVE FIXES
+   ========================= */
+@media (max-width: 768px) {
+
+  /* Navbar fix */
+  .navbar {
+    flex-wrap: wrap;
+    padding: 14px 18px;
+  }
+
+  .nav-links {
+    gap: 14px;
+    font-size: 0.95rem;
+  }
+
+  .logo {
+    white-space: nowrap;
+  }
+
+  /* Hero section */
+  .hero {
+    padding: 0 20px;
+    text-align: center;
+  }
+
+  .hero h1 {
+    font-size: 2.2rem;
+  }
+
+  .hero p {
+    font-size: 1rem;
+    line-height: 1.5;
+  }
+
+  /* FIX: buttons overlapping */
+  .buttons {
+    display: flex;
+    flex-direction: column;
+    gap: 14px;
+    align-items: center;
+  }
+
+  .buttons .btn {
+    width: 100%;
+    max-width: 280px;
+    text-align: center;
+  }
+}
+
