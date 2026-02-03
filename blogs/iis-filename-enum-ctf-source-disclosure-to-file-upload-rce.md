@@ -39,7 +39,7 @@ Well my attention caught into zip file(API202?.zip) , as the ZIP file contain wh
 
 Then i downloaded the Source code via curl with ``curl https://ctf.com/api2025backup.zip -o source-code.zip`` and unziped the file with `unzip source-code.zip`, upon extracting it have some files like README.md, requirements, __MACos. But my attention caught into app.py at first glance it is complete UI then at the beginning of the .py file it was found an hardcoded username and password, then since code is long and i am not code reviewer i parsed the full code to chatgpt. it was explained the entire code and then after some dangling it was found application indeed need `Authorization: Bearer <Token>` then concluded the code actually was base64 of username and password in host format i.e  (**username:password**) then we got the final Token i.e `Authorization: Bearer YXBpX3NlcjpUcnlVcnNlbGYh` using match and replace we got an authenticated access.
 
-## Getting RCE via File Upload 
+# Getting RCE via File Upload 
 The initial look at API documentation revealed two crucial endpoint a file upload functionalities(any file), and file converter path, i quickly prepared myself and uploaded a file using this command 
 ```
 curl -X POST \
