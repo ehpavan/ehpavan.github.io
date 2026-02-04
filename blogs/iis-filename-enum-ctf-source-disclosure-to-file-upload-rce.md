@@ -49,7 +49,7 @@ curl -X POST \
 ```
 the app returned 
 <div style="max-width:900px;margin:28px auto;text-align:center;">
-  <img src="images/response.png"
+  <img src="images/upload.png"
        alt=""
        style="width:100%;max-width:900px;height:auto;display:block;margin:0 auto;border-radius:10px;box-shadow:0 6px 18px rgba(0,0,0,0.08);background:#f6f6f6;object-fit:contain;"
        loading="lazy" decoding="async" width="1200" height="675">
