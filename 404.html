@@ -1,0 +1,179 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<title>Error 404</title>
+
+<style>
+@import url(https://fonts.googleapis.com/css?family=Gilda+Display);
+
+/* ===== BASE ===== */
+
+html {
+  background-color:black;
+  color:white;
+  overflow:hidden;
+  height:100%;
+  user-select:none;
+  font-size:medium;
+}
+
+body{
+  margin:0;
+}
+
+/* ===== MAIN CONTAINER ===== */
+
+.error {
+  font-family:'Gilda Display', serif;
+  width:100%;
+  height:120px;
+  margin:auto;
+  position:absolute;
+  top:0;
+  bottom:0;
+  left:0;
+  right:0;
+  text-align:center;
+  animation:noise-3 1s linear infinite;
+}
+
+/* ===== GLITCH TEXT ===== */
+
+body:after,
+body:before{
+  content:'error 404';
+  font-family:monospace;
+  font-size:100px;
+  position:absolute;
+  top:25%;
+  left:0;
+  right:0;
+  text-align:center;
+  opacity:0;
+  color:white;
+}
+
+body:after{
+  animation:noise-1 .2s linear infinite;
+}
+
+body:before{
+  animation:noise-2 .2s linear infinite;
+}
+
+/* ===== INFO TEXT ===== */
+
+.info{
+  position:absolute;
+  top:280px;
+  left:0;
+  right:0;
+  text-align:center;
+  animation:noise-3 1s linear infinite;
+}
+
+.info:before,
+.info:after{
+  content:'file not found';
+  font-family:monospace;
+  font-size:60px;
+  position:absolute;
+  left:0;
+  right:0;
+  text-align:center;
+  opacity:0;
+}
+
+.info:before{
+  animation:noise-2 .2s linear infinite;
+}
+
+.info:after{
+  animation:noise-1 .2s linear infinite;
+}
+
+/* ===== CODE BLOCK ===== */
+
+.wrap{
+  position:absolute;
+  top:30%;
+  left:50%;
+  transform:translate(-50%,-50%);
+}
+
+code{color:white;}
+
+.blue{color:#48beef;}
+.comment{color:#7f8c8d;}
+.orange{color:#f39c12;}
+.green{color:#33cc33;}
+
+/* ===== HOME BUTTON ===== */
+
+.home{
+  color:orange;
+  font-family:monospace;
+  text-decoration:none;
+  display:block;
+  margin-top:40px;
+}
+
+/* ===== ANIMATIONS ===== */
+
+@keyframes noise-1 {
+  0%,20%,40%,60%,70%,90%{opacity:0;}
+  10%{opacity:.1;}
+  50%{opacity:.5;left:-6px;}
+  80%{opacity:.3;}
+  100%{opacity:.6;left:2px;}
+}
+
+@keyframes noise-2 {
+  0%,20%,40%,60%,70%,90%{opacity:0;}
+  10%{opacity:.1;}
+  50%{opacity:.5;left:6px;}
+  80%{opacity:.3;}
+  100%{opacity:.6;left:-2px;}
+}
+
+@keyframes noise-3 {
+  0%,3%,5%,42%,44%,100%{transform:scaleY(1);}
+  4.3%{transform:scaleY(4);}
+  43%{transform:scaleX(10) rotate(60deg);}
+}
+
+</style>
+</head>
+
+<body>
+
+<div class="error">
+<div class="wrap">
+<div class="404">
+
+<pre><code>
+<span class="green">&lt;!</span><span>DOCTYPE html</span><span class="green">&gt;</span>
+<span class="orange">&lt;html&gt;</span>
+
+    ERROR 404!
+    FILE NOT FOUND!
+
+<span class="comment">&lt;!--
+The file you are looking for,
+is not where you think it is.
+--&gt;</span>
+
+<span class="orange">&lt;/html&gt;</span>
+</code></pre>
+
+<a class="home" href="/">← return home</a>
+
+</div>
+</div>
+
+<div class="info"></div>
+</div>
+
+</body>
+</html>
