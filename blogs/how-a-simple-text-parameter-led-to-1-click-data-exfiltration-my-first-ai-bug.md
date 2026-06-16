@@ -49,8 +49,9 @@ But while i was reporting i changed the the url - https://webhook.site/<ID> and 
   </p>
 </div>
 
-> [!TIP]
-> Always maintain your own callback infrastructure for both HTTP(S) and DNS testing. Many WAFs and security products automatically flag or block well-known domains such as Interactsh and Burp Collaborator because they are commonly used during security assessments. Having a trusted domain under your control can help validate whether you're hitting a genuine security control or simply being blocked due to the reputation of the callback service.
+>  **Pro Tip**
+>
+> Always maintain your own callback infrastructure for both HTTP(S) and DNS testing. Many WAFs and security products automatically flag or block well-known domains such as Interactsh and Burp Collaborator because they are commonly used during security assessments.
 
 
 
