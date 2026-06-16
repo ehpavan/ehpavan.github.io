@@ -4,6 +4,11 @@
     "file": "How I Escalated a Simple Email HTML Injection from P4 to P3.md",
     "date": "2025-10-27"
   },
+   {
+    "title": "How a Simple ?text= Parameter Led to 1-Click Data Exfiltration — My First AI Bug",
+    "file": "How I Escalated a Simple Email HTML Injection from P4 to P3.md",
+    "date": "2026-06-16"
+  },
   {
     "title": "IIS Filename Enum (CTF): From Source Disclosure to File Upload RCE",
     "file": "iis-filename-enum-ctf-source-disclosure-to-file-upload-rce.md",
