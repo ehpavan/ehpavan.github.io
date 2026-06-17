@@ -125,3 +125,70 @@ h1 {
   padding: 0;
   color: #e6e6e6;
 }
+/* ===== MOBILE & OVERFLOW FIXES ===== */
+
+/* Prevent horizontal scrolling */
+html,
+body {
+  width: 100%;
+  overflow-x: hidden;
+}
+
+/* Better width calculations */
+*,
+*::before,
+*::after {
+  box-sizing: border-box;
+}
+
+/* Keep blog container inside viewport */
+.blog-content {
+  max-width: 820px;
+  width: 100%;
+  margin: auto;
+}
+
+/* Wrap long URLs, hashes, tokens, code snippets, etc. */
+.blog-content p,
+.blog-content li,
+.blog-content a,
+.blog-content code,
+.blog-content blockquote {
+  overflow-wrap: anywhere;
+  word-break: break-word;
+}
+
+/* Images never exceed screen width */
+.blog-content img {
+  max-width: 100%;
+  height: auto;
+}
+
+/* Code blocks remain scrollable without breaking layout */
+.blog-content pre {
+  max-width: 100%;
+  overflow-x: auto;
+  -webkit-overflow-scrolling: touch;
+}
+
+/* Mobile-specific spacing */
+@media (max-width: 768px) {
+  body {
+    padding: 16px;
+  }
+
+  nav {
+    margin-bottom: 20px;
+  }
+
+  .blog-content {
+    width: 100%;
+    max-width: 100%;
+  }
+
+  .blog-content h1,
+  .blog-content h2,
+  .blog-content h3 {
+    word-break: break-word;
+  }
+}
