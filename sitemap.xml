@@ -1,48 +1,35 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<?xml-stylesheet type="text/css" href="https://www.xml-sitemaps.com/css/sitemap.css"?>
-<urlset
-      xmlns="http://www.sitemaps.org/schemas/sitemap/0.9"
-      xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
-      xmlns:xsl="http://www.w3.org/1999/XSL/Transform"
-      xmlns:fo="http://www.w3.org/1999/XSL/Format"
-      xmlns:xhtml="http://www.w3.org/1999/xhtml"
-      xsi:schemaLocation="http://www.sitemaps.org/schemas/sitemap/0.9
-      http://www.sitemaps.org/schemas/sitemap/0.9/sitemap.xsd">
 
-<url>
-  <loc>https://ehpavan.github.io/</loc>
-  <lastmod>2026-06-23T15:09:32+00:00</lastmod>
-  <priority>1.00</priority>
-</url>
+<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
 
-<url>
-  <loc>https://ehpavan.github.io/blogs/</loc>
-  <lastmod>2026-06-23T15:09:32+00:00</lastmod>
-  <priority>0.90</priority>
-</url>
+  <url>
+    <loc>https://ehpavan.github.io/</loc>
+    <lastmod>2026-06-23</lastmod>
+  </url>
 
-<url>
-  <loc>https://ehpavan.github.io/projects/</loc>
-  <lastmod>2026-06-23T15:09:32+00:00</lastmod>
-  <priority>0.80</priority>
-</url>
+  <url>
+    <loc>https://ehpavan.github.io/blogs/</loc>
+    <lastmod>2026-06-23</lastmod>
+  </url>
 
-<url>
-  <loc>https://ehpavan.github.io/blogs/blog.html?file=how-a-simple-text-parameter-led-to-1-click-data-exfiltration-my-first-ai-bug.md</loc>
-  <lastmod>2026-06-23T15:09:32+00:00</lastmod>
-  <priority>0.85</priority>
-</url>
+  <url>
+    <loc>https://ehpavan.github.io/projects/</loc>
+    <lastmod>2026-06-23</lastmod>
+  </url>
 
-<url>
-  <loc>https://ehpavan.github.io/blogs/blog.html?file=iis-filename-enum-ctf-source-disclosure-to-file-upload-rce.md</loc>
-  <lastmod>2026-06-23T15:09:32+00:00</lastmod>
-  <priority>0.85</priority>
-</url>
+  <url>
+    <loc>https://ehpavan.github.io/blogs/blog.html?file=how-a-simple-text-parameter-led-to-1-click-data-exfiltration-my-first-ai-bug.md</loc>
+    <lastmod>2026-06-23</lastmod>
+  </url>
 
-<url>
-  <loc>https://ehpavan.github.io/blogs/blog.html?file=how-i-escalated-a-simple-email-html-injection-from-p4-to-p3.md</loc>
-  <lastmod>2026-06-23T15:09:32+00:00</lastmod>
-  <priority>0.85</priority>
-</url>
+  <url>
+    <loc>https://ehpavan.github.io/blogs/blog.html?file=iis-filename-enum-ctf-source-disclosure-to-file-upload-rce.md</loc>
+    <lastmod>2026-06-23</lastmod>
+  </url>
+
+  <url>
+    <loc>https://ehpavan.github.io/blogs/blog.html?file=how-i-escalated-a-simple-email-html-injection-from-p4-to-p3.md</loc>
+    <lastmod>2026-06-23</lastmod>
+  </url>
 
 </urlset>
