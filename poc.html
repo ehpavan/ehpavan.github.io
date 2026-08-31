@@ -1,0 +1,33 @@
+<!doctype html>
+<html>
+<body>
+<script>
+fetch("https://www.finn.no/public/redirect/shipping/next/475211155", {
+  method: "POST",
+  credentials: "include",
+  headers: {
+    "Content-Type": "application/x-www-form-urlencoded"
+  },
+  body: new URLSearchParams({
+    "package-size": "on",
+    "packageSize": "SMALL",
+    "selling-options": "on",
+    "buyNow": "on",
+    "name": "Testannonse Testannonse",
+    "phoneNumber": "98521169",
+    "streetName": "OSLOFJORDVEIEN",
+    "streetNo": "2",
+    "houseType": "F",
+    "postalCode": "3159",
+    "city": "MELSOMVIK",
+    "deliveryPointId": "10259593",
+    "shipping-provider-select": "on",
+    "providers": "MYPACK_GO,NORGESPAKKE",
+    "providerCount": "2"
+  })
+})
+.then(r => console.log("status:", r.status))
+.catch(e => console.log("fetch error:", e));
+</script>
+</body>
+</html>
