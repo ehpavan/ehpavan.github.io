@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>CORS Redirect Test</title>
+</head>
+<body>
+    <h2>NordAccount CORS Redirect Test</h2>
+    <pre id="output">Testing...</pre>
+
+    <script>
+    (async () => {
+        const output = document.getElementById("output");
+
+        const target =
+            "https://my.nordaccount.com/linked-accounts/initiate?provider=google";
+
+        try {
+            const response = await fetch(target, {
+                method: "GET",
+                mode: "cors",
+                credentials: "omit",
+                redirect: "follow",
+                cache: "no-store",
+                referrerPolicy: "no-referrer"
+            });
+
+            const result = {
+                status: response.status,
+                redirected: response.redirected,
+                finalURL: response.url,
+                responseType: response.type
+            };
+
+            output.textContent = JSON.stringify(result, null, 2);
+            console.log(result);
+
+        } catch (error) {
+            output.textContent =
+                "Request failed: " + error.message;
+
+            console.error(error);
+        }
+    })();
+    </script>
+</body>
+</html>
